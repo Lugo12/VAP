@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VAP_ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="administrador">
+    <Key>
+      <PropertyRef Name="id_administrador" />
+    </Key>
+    <Property Name="id_administrador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="txt_correo_admin" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="txt_contraseña_admin" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="id_cliente" />
+    </Key>
+    <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="txt_nombre_cliente" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="txt_apellidos_cliente" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="int_celular_cliente" Type="bigint" Nullable="false" />
+    <Property Name="txt_correo_cliente" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="txt_contraseña_cliente" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pedido">
+    <Key>
+      <PropertyRef Name="id_pedido" />
+    </Key>
+    <Property Name="id_pedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="d_fecha_pedido" Type="date" Nullable="false" />
+    <Property Name="dec_total_pedido" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="txt_estado_pedido" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="id_cliente" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="producto">
+    <Key>
+      <PropertyRef Name="id_prenda" />
+    </Key>
+    <Property Name="id_prenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="txt_tipo_prenda" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="txt_concepto_prenda" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="txt_marca_prenda" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="dec_precio_prenda" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="img_blanco_prenda" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="img_negro_prenda" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="txt_estado_prenda" Type="varchar" MaxLength="13" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'VAP_Project.dbo.producto_seleccionado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="producto_seleccionado">
+    <Key>
+      <PropertyRef Name="int_cantidad_subpedido" />
+      <PropertyRef Name="txt_id_variante" />
+      <PropertyRef Name="id_pedido" />
+    </Key>
+    <Property Name="int_cantidad_subpedido" Type="int" Nullable="false" />
+    <Property Name="txt_id_variante" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="id_pedido" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="variantes_producto">
+    <Key>
+      <PropertyRef Name="id_variante" />
+    </Key>
+    <Property Name="id_variante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="txt_id_variante" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="txt_color_prenda" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="txt_talla_prenda" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="int_cantidad_prenda" Type="int" Nullable="false" />
+    <Property Name="id_prenda" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="venta">
+    <Key>
+      <PropertyRef Name="id_venta" />
+    </Key>
+    <Property Name="id_venta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_pedido" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_pedido_cliente">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+    <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="id_cliente" />
+      </Principal>
+      <Dependent Role="pedido">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_pedido_completo">
+    <End Role="pedido" Type="Self.pedido" Multiplicity="1" />
+    <End Role="producto_seleccionado" Type="Self.producto_seleccionado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pedido">
+        <PropertyRef Name="id_pedido" />
+      </Principal>
+      <Dependent Role="producto_seleccionado">
+        <PropertyRef Name="id_pedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errores durante la generación:
+advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="fk_producto_pedido" />-->
+  <Association Name="fk_variante_prenda">
+    <End Role="producto" Type="Self.producto" Multiplicity="1" />
+    <End Role="variantes_producto" Type="Self.variantes_producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="producto">
+        <PropertyRef Name="id_prenda" />
+      </Principal>
+      <Dependent Role="variantes_producto">
+        <PropertyRef Name="id_prenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_venta_pedido">
+    <End Role="pedido" Type="Self.pedido" Multiplicity="1" />
+    <End Role="venta" Type="Self.venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pedido">
+        <PropertyRef Name="id_pedido" />
+      </Principal>
+      <Dependent Role="venta">
+        <PropertyRef Name="id_pedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AgrgarProductoVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cantidad" Type="int" Mode="In" />
+    <Parameter Name="idVariante" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CancelarPedido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idPedido" Type="int" Mode="In" />
+    <Parameter Name="idCliente" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ComprobarPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="correo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CrearCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="apellidos_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="celular_cliente" Type="bigint" Mode="In" />
+    <Parameter Name="correo_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="contraseña_cliente" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="CrearProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="txt_tipo_prenda" Type="varchar" Mode="In" />
+    <Parameter Name="txt_concepto_prenda" Type="varchar" Mode="In" />
+    <Parameter Name="txt_marca_prenda" Type="varchar" Mode="In" />
+    <Parameter Name="dec_precio_prenda" Type="decimal" Mode="In" />
+    <Parameter Name="img_blanco_prenda" Type="varchar" Mode="In" />
+    <Parameter Name="img_negro_prenda" Type="varchar" Mode="In" />
+    <Parameter Name="txt_estado_prenda" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CrearVariante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="txt_color_prenda" Type="varchar" Mode="In" />
+    <Parameter Name="txt_talla_prenda" Type="varchar" Mode="In" />
+    <Parameter Name="int_cantidad_prenda" Type="int" Mode="In" />
+    <Parameter Name="idVariante" Type="varchar" Mode="In" />
+    <Parameter Name="idprenda" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CreaVentaNueva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fecha_pedido" Type="date" Mode="In" />
+    <Parameter Name="total_pedido" Type="decimal" Mode="In" />
+    <Parameter Name="id_cliente" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditarInfCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idcliente" Type="int" Mode="In" />
+    <Parameter Name="nomCliente" Type="varchar" Mode="In" />
+    <Parameter Name="ApeCliente" Type="varchar" Mode="In" />
+    <Parameter Name="celClietne" Type="bigint" Mode="In" />
+    <Parameter Name="correoCliente" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="VAP_ProjectModelStoreContainer">
+    <EntitySet Name="administrador" EntityType="Self.administrador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pedido" EntityType="Self.pedido" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="producto" EntityType="Self.producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="variantes_producto" EntityType="Self.variantes_producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="venta" EntityType="Self.venta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="producto_seleccionado" EntityType="Self.producto_seleccionado" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [producto_seleccionado].[int_cantidad_subpedido] AS [int_cantidad_subpedido], 
+    [producto_seleccionado].[txt_id_variante] AS [txt_id_variante], 
+    [producto_seleccionado].[id_pedido] AS [id_pedido]
+    FROM [dbo].[producto_seleccionado] AS [producto_seleccionado]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="fk_pedido_cliente" Association="Self.fk_pedido_cliente">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="pedido" EntitySet="pedido" />
+    </AssociationSet>
+    <AssociationSet Name="fk_pedido_completo" Association="Self.fk_pedido_completo">
+      <End Role="pedido" EntitySet="pedido" />
+      <End Role="producto_seleccionado" EntitySet="producto_seleccionado" />
+    </AssociationSet>
+    <AssociationSet Name="fk_variante_prenda" Association="Self.fk_variante_prenda">
+      <End Role="producto" EntitySet="producto" />
+      <End Role="variantes_producto" EntitySet="variantes_producto" />
+    </AssociationSet>
+    <AssociationSet Name="fk_venta_pedido" Association="Self.fk_venta_pedido">
+      <End Role="pedido" EntitySet="pedido" />
+      <End Role="venta" EntitySet="venta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

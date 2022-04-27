@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VAP_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="VAP_ProjectEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="AgrgarProductoVenta">
+      <Parameter Name="cantidad" Mode="In" Type="Int32" />
+      <Parameter Name="idVariante" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CancelarPedido">
+      <Parameter Name="idPedido" Mode="In" Type="Int32" />
+      <Parameter Name="idCliente" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ComprobarPass" ReturnType="Collection(VAP_ProjectModel.ComprobarPass_Result)">
+      <Parameter Name="correo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CrearCliente" ReturnType="Collection(VAP_ProjectModel.CrearCliente_Result)">
+      <Parameter Name="nombre_cliente" Mode="In" Type="String" />
+      <Parameter Name="apellidos_cliente" Mode="In" Type="String" />
+      <Parameter Name="celular_cliente" Mode="In" Type="Int64" />
+      <Parameter Name="correo_cliente" Mode="In" Type="String" />
+      <Parameter Name="contraseña_cliente" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CrearProducto">
+      <Parameter Name="txt_tipo_prenda" Mode="In" Type="String" />
+      <Parameter Name="txt_concepto_prenda" Mode="In" Type="String" />
+      <Parameter Name="txt_marca_prenda" Mode="In" Type="String" />
+      <Parameter Name="dec_precio_prenda" Mode="In" Type="Decimal" />
+      <Parameter Name="img_blanco_prenda" Mode="In" Type="String" />
+      <Parameter Name="img_negro_prenda" Mode="In" Type="String" />
+      <Parameter Name="txt_estado_prenda" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CrearVariante">
+      <Parameter Name="txt_color_prenda" Mode="In" Type="String" />
+      <Parameter Name="txt_talla_prenda" Mode="In" Type="String" />
+      <Parameter Name="int_cantidad_prenda" Mode="In" Type="Int32" />
+      <Parameter Name="idVariante" Mode="In" Type="String" />
+      <Parameter Name="idprenda" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CreaVentaNueva">
+      <Parameter Name="fecha_pedido" Mode="In" Type="DateTime" />
+      <Parameter Name="total_pedido" Mode="In" Type="Decimal" />
+      <Parameter Name="id_cliente" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EditarInfCliente">
+      <Parameter Name="idcliente" Mode="In" Type="Int32" />
+      <Parameter Name="nomCliente" Mode="In" Type="String" />
+      <Parameter Name="ApeCliente" Mode="In" Type="String" />
+      <Parameter Name="celClietne" Mode="In" Type="Int64" />
+      <Parameter Name="correoCliente" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="administrador" EntityType="VAP_ProjectModel.administrador" />
+    <EntitySet Name="cliente" EntityType="VAP_ProjectModel.cliente" />
+    <EntitySet Name="pedido" EntityType="VAP_ProjectModel.pedido" />
+    <EntitySet Name="producto" EntityType="VAP_ProjectModel.producto" />
+    <EntitySet Name="variantes_producto" EntityType="VAP_ProjectModel.variantes_producto" />
+    <EntitySet Name="venta" EntityType="VAP_ProjectModel.venta" />
+    <EntitySet Name="producto_seleccionado" EntityType="VAP_ProjectModel.producto_seleccionado" />
+    <AssociationSet Name="fk_pedido_cliente" Association="VAP_ProjectModel.fk_pedido_cliente">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="pedido" EntitySet="pedido" />
+    </AssociationSet>
+    <AssociationSet Name="fk_pedido_completo" Association="VAP_ProjectModel.fk_pedido_completo">
+      <End Role="pedido" EntitySet="pedido" />
+      <End Role="producto_seleccionado" EntitySet="producto_seleccionado" />
+    </AssociationSet>
+    <AssociationSet Name="fk_venta_pedido" Association="VAP_ProjectModel.fk_venta_pedido">
+      <End Role="pedido" EntitySet="pedido" />
+      <End Role="venta" EntitySet="venta" />
+    </AssociationSet>
+    <AssociationSet Name="fk_variante_prenda" Association="VAP_ProjectModel.fk_variante_prenda">
+      <End Role="producto" EntitySet="producto" />
+      <End Role="variantes_producto" EntitySet="variantes_producto" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="ComprobarPass_Result">
+    <Property Type="Int32" Name="id_cliente" Nullable="false" />
+    <Property Type="String" Name="txt_nombre_cliente" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="txt_apellidos_cliente" Nullable="false" MaxLength="40" />
+    <Property Type="Int64" Name="int_celular_cliente" Nullable="false" />
+    <Property Type="String" Name="txt_correo_cliente" Nullable="false" MaxLength="45" />
+    <Property Type="Binary" Name="txt_contraseña_cliente" Nullable="false" />
+    <Property Type="String" Name="Pass" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="CrearCliente_Result">
+    <Property Type="Int32" Name="id_cliente" Nullable="false" />
+    <Property Type="String" Name="txt_nombre_cliente" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="txt_apellidos_cliente" Nullable="false" MaxLength="40" />
+    <Property Type="Int64" Name="int_celular_cliente" Nullable="false" />
+    <Property Type="String" Name="txt_correo_cliente" Nullable="false" MaxLength="45" />
+    <Property Type="Binary" Name="txt_contraseña_cliente" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="administrador">
+    <Key>
+      <PropertyRef Name="id_administrador" />
+    </Key>
+    <Property Name="id_administrador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="txt_correo_admin" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="txt_contraseña_admin" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="id_cliente" />
+    </Key>
+    <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="txt_nombre_cliente" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="txt_apellidos_cliente" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="int_celular_cliente" Type="Int64" Nullable="false" />
+    <Property Name="txt_correo_cliente" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="txt_contraseña_cliente" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="pedido" Relationship="VAP_ProjectModel.fk_pedido_cliente" FromRole="cliente" ToRole="pedido" />
+  </EntityType>
+  <EntityType Name="pedido">
+    <Key>
+      <PropertyRef Name="id_pedido" />
+    </Key>
+    <Property Name="id_pedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="d_fecha_pedido" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="dec_total_pedido" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+    <Property Name="txt_estado_pedido" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="id_cliente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cliente" Relationship="VAP_ProjectModel.fk_pedido_cliente" FromRole="pedido" ToRole="cliente" />
+    <NavigationProperty Name="producto_seleccionado" Relationship="VAP_ProjectModel.fk_pedido_completo" FromRole="pedido" ToRole="producto_seleccionado" />
+    <NavigationProperty Name="venta" Relationship="VAP_ProjectModel.fk_venta_pedido" FromRole="pedido" ToRole="venta" />
+  </EntityType>
+  <EntityType Name="producto">
+    <Key>
+      <PropertyRef Name="id_prenda" />
+    </Key>
+    <Property Name="id_prenda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="txt_tipo_prenda" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="txt_concepto_prenda" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="txt_marca_prenda" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="dec_precio_prenda" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="img_blanco_prenda" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="img_negro_prenda" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="txt_estado_prenda" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="variantes_producto" Relationship="VAP_ProjectModel.fk_variante_prenda" FromRole="producto" ToRole="variantes_producto" />
+  </EntityType>
+  <EntityType Name="variantes_producto">
+    <Key>
+      <PropertyRef Name="id_variante" />
+    </Key>
+    <Property Name="id_variante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="txt_id_variante" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txt_color_prenda" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="txt_talla_prenda" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="int_cantidad_prenda" Type="Int32" Nullable="false" />
+    <Property Name="id_prenda" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="producto" Relationship="VAP_ProjectModel.fk_variante_prenda" FromRole="variantes_producto" ToRole="producto" />
+  </EntityType>
+  <EntityType Name="venta">
+    <Key>
+      <PropertyRef Name="id_venta" />
+    </Key>
+    <Property Name="id_venta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_pedido" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="pedido" Relationship="VAP_ProjectModel.fk_venta_pedido" FromRole="venta" ToRole="pedido" />
+  </EntityType>
+  <EntityType Name="producto_seleccionado">
+    <Key>
+      <PropertyRef Name="int_cantidad_subpedido" />
+      <PropertyRef Name="txt_id_variante" />
+      <PropertyRef Name="id_pedido" />
+    </Key>
+    <Property Name="int_cantidad_subpedido" Type="Int32" Nullable="false" />
+    <Property Name="txt_id_variante" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="id_pedido" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="pedido" Relationship="VAP_ProjectModel.fk_pedido_completo" FromRole="producto_seleccionado" ToRole="pedido" />
+  </EntityType>
+  <Association Name="fk_pedido_cliente">
+    <End Type="VAP_ProjectModel.cliente" Role="cliente" Multiplicity="1" />
+    <End Type="VAP_ProjectModel.pedido" Role="pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="id_cliente" />
+      </Principal>
+      <Dependent Role="pedido">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_pedido_completo">
+    <End Type="VAP_ProjectModel.pedido" Role="pedido" Multiplicity="1" />
+    <End Type="VAP_ProjectModel.producto_seleccionado" Role="producto_seleccionado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pedido">
+        <PropertyRef Name="id_pedido" />
+      </Principal>
+      <Dependent Role="producto_seleccionado">
+        <PropertyRef Name="id_pedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_venta_pedido">
+    <End Type="VAP_ProjectModel.pedido" Role="pedido" Multiplicity="1" />
+    <End Type="VAP_ProjectModel.venta" Role="venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pedido">
+        <PropertyRef Name="id_pedido" />
+      </Principal>
+      <Dependent Role="venta">
+        <PropertyRef Name="id_pedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_variante_prenda">
+    <End Type="VAP_ProjectModel.producto" Role="producto" Multiplicity="1" />
+    <End Type="VAP_ProjectModel.variantes_producto" Role="variantes_producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="producto">
+        <PropertyRef Name="id_prenda" />
+      </Principal>
+      <Dependent Role="variantes_producto">
+        <PropertyRef Name="id_prenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,82 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPageCliente.master.cs" Inherits="VAP.MasterPages.MasterPageCliente" %>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VAP</title>
+  <link rel="shortcut icon" href="../Recursos/icon/VAP_Logo.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Recursos/css/normalize.css">
+  <link rel="stylesheet" href="../Recursos/css/estilos.css">
+  <link rel="stylesheet" href="../Recursos/css/bootstrap.min.css" /> 
+  <script src="https://kit.fontawesome.com/e650e71a85.js"></script>
+</head>
+
+<body>
+  <div class="contenedor-maestro">
+    <header>
+      <div class="botones_izq">
+        <button class="toggler" type="button">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="../Default.aspx" class="logo"><img src="../Imagenes/VAP_Logo.png" alt="Logo"></a>
+      </div>
+      <div class="busqueda">
+        <input type="text" placeholder="¿Qué estas buscando?">
+        <button class="lupa" type="button">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      <div class="busqueda_responsive">
+        <button class="btn_der lupa2" type="button">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      <div class="botones_der">
+        <a href="../Carrito.aspx" class="btn_der"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="../Perfil.aspx" class="btn_der on-session"><i class="fa-solid fa-circle-user"></i></a>
+        <a href="#" class="btn_der sign-in"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+      </div>
+    </header>
+    <aside class="aside">
+      <a href="../Default.aspx" class="aside_links">
+        <i class="fa-solid fa-shirt"></i>
+        <span>Catálogo</span>
+      </a>
+      <a href="../Carrito.aspx" class="aside_links">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Carrito</span>
+      </a>
+      <a href="../Perfil.aspx" class="aside_links on-session">
+        <i class="fa-solid fa-user"></i>
+        <span>Perfil</span>
+      </a>
+      <a href="../PedidosCliente.aspx" class="aside_links on-session">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <span>Pedidos</span>
+      </a>
+      <a href="#" class="aside_links sign-off">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Cerrar Sesión</span>
+      </a>
+    </aside>
+    <main class="main">
+        <form id="form1" runat="server">
+          <div class="contenido">
+              <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+              </asp:ContentPlaceHolder>
+          </div>
+        </form>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  <script src="../Recursos/js/responsive.js"></script>
+</body>
+
+</html>
