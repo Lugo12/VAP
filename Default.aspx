@@ -28,10 +28,6 @@
 
     <section class="body_catalogo oculto"></section>
 
-    <div class="mensaje mensaje_catalogo oculto">
-        <h2>Parece que no hay productos por el momento</h2>
-    </div>
-
     <div class="modal fade" id="modal_detalles" tabindex="-1" aria-labelledby="titulo_modal_detalles" aria-hidden="true">
         <div class="producto_modal modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -75,7 +71,7 @@
                                 <label class="color blanco btn btn-outline-primary" for="btnradioB"></label>
                             </div>
                         </div>
-                        <h5 id="modal_existencias" class="invisible">Sin Existencias</h5>
+                        <h5 id="modal_existencias" class="invisible"></h5>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -84,11 +80,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="alert alert-dismissible alert-success">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
     </div>
 
     <template id="template_catalogo">

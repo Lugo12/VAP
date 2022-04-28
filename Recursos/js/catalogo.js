@@ -1,4 +1,5 @@
 import { ajax } from './ajax.js';       //importando funcion ajax
+import { alert } from './alerta.js';       //importando funcion ajax
 (function () {
     const $head = document.querySelector('.head_catalogo'),
         $body = document.querySelector('.body_catalogo'),
@@ -8,17 +9,47 @@ import { ajax } from './ajax.js';       //importando funcion ajax
         'POST',
         'Default.aspx/GetCatalogo',
         null,
-        data => data.length === 0 ? falla() : peticionExitosa(data),
+        data => {
+            //Validación en caso de excepción en lugar de datos esperados
+            if (!data.ClassName) data.length === 0 ? falla() : peticionExitosa(comparaCarrito(data))
+            else {
+                falla()
+                console.log("Excepcion del lado del servidor:", data);
+            }
+        },
         error => {
             console.error(error);
             falla();
         }
     );
+    //funcion para comparar la información de la base de datos con la del carrito
+    const comparaCarrito = data => {
+        //si el localStorage es igual a 0 omitimos esta funcion, si no entramos a su funcionamiento
+        if (localStorage.length > 0) {
+            const keys = [];    //arreglo de todas las llaves que hay en el localStorage
+            for (let key = 0; key < localStorage.length; key++) {
+                keys.push(localStorage.key(key));
+            }
+            data.forEach(producto => {
+                producto.variantes_producto.forEach(variante => {
+                    keys.forEach(key => {
+                        const valor = JSON.parse(localStorage.getItem(key));    //valor del item en el localStorage donde la llave es igual a key
+                        //si las id de los productos que hay en el localStorage y la BD coincide entra
+                        if (variante.txt_id_variante === valor.variantes_producto.txt_id_variante) {
+                            --variante.int_cantidad_prenda; //se disminuye una unidad
+                        }
+                    })
+                })
+            })
+            return data;
+        } else return data;
+    }
     //render de vista en caso de fracaso
     const falla = () => {       
         $head.classList.add('oculto');
         $body.classList.add('oculto');
         $mensaje.classList.remove('oculto');
+        $mensaje.querySelector('h2').textContent = "Parece que no hay productos por el momento";
     };
     //render de vista en caso de exito
     const exito = () => {       
@@ -45,7 +76,7 @@ import { ajax } from './ajax.js';       //importando funcion ajax
         $body.appendChild($fragment);       //agregamos el fragmento a la vista
     }
     //funcion que se ejecuta despues de que la peticion ajax haya sido un exito
-    const peticionExitosa = data => {        
+    const peticionExitosa = data => {
         exito();
         renderCatalogo(data);
         const $modal = document.getElementById('modal_detalles'),
@@ -56,13 +87,20 @@ import { ajax } from './ajax.js';       //importando funcion ajax
             $modal_contenido = document.querySelector('.contenido_modal'),
             $modal_existencias = document.getElementById('modal_existencias'),
             $modal_carrito = document.getElementById('agregar_carrito');
-        let data_actual = data, producto = null, variante = null, talla = null, color = null, talla_actual = null;
+        let data_actual = data.slice(),
+            producto = null,
+            variante = null,
+            talla = null,
+            color = null,
+            talla_actual = null;
         //funcion para cerrar el modal y limpiar las selecciones
         const limpiaModal = () => {
             $modal_carrito.classList.add('disabled');
             $modal_existencias.classList.add('invisible');
             $modal_contenido.querySelector('.blanco').classList.remove('seleccionado');
             $modal_contenido.querySelector('.negro').classList.remove('seleccionado');
+            $modal_existencias.textContent = "";
+            $modal_existencias.classList.add('invisible');
             talla = null;
             color = null;
             producto = null;
@@ -85,6 +123,19 @@ import { ajax } from './ajax.js';       //importando funcion ajax
                 $modal_concepto.textContent = producto.txt_concepto_prenda;
             }
         }
+        //funcion para clonar objetos profundos
+        const deepClone = objeto => {
+            const clon = {};
+            for (let key in objeto) {
+                let valor = objeto[key];
+                if (typeof (valor) !== 'object') {
+                    clon[key] = valor;
+                } else {
+                    clon[key] = deepClone(valor);
+                }
+            }
+            return clon;
+        }
         //Efecto al pasar el mouse sobre una imagen
         $body.addEventListener('mouseover', e => {
             const $imagenes = Array.from($body.getElementsByTagName('img'));
@@ -105,32 +156,28 @@ import { ajax } from './ajax.js';       //importando funcion ajax
                 //acciones para cada elemento que haya lanzado el evento
                 switch (e.target.id) {
                     case 'flt_Todo':
-                        renderCatalogo(data);
-                        data_actual = data;
+                        data_actual = data.slice();
                         break;
                     case 'flt_Sudadera':
                         let sudaderas = data_actual.filter(producto => producto.txt_tipo_prenda === "sudadera");
                         if (sudaderas.length === 0) sudaderas = data.filter(producto => producto.txt_tipo_prenda === "sudadera");
-                        renderCatalogo(sudaderas);
-                        data_actual = sudaderas;
+                        data_actual = sudaderas.slice();
                         break;
                     case 'flt_Playera':
                         let playeras = data_actual.filter(producto => producto.txt_tipo_prenda === "playera");
                         if (playeras.length === 0) playeras = data.filter(producto => producto.txt_tipo_prenda === "playera");
-                        renderCatalogo(playeras);
-                        data_actual = playeras;
+                        data_actual = playeras.slice();
                         break;
                     case 'ob_Menor':
                         const menores = data_actual.sort((p1, p2) => (p1.dec_precio_prenda > p2.dec_precio_prenda) ? 1 : (p1.dec_precio_prenda < p2.dec_precio_prenda) ? -1 : 0);
-                        renderCatalogo(menores);
-                        data_actual = menores;
+                        data_actual = menores.slice();
                         break;
                     case 'ob_Mayor':
                         const mayores = data_actual.sort((p1, p2) => (p1.dec_precio_prenda < p2.dec_precio_prenda) ? 1 : (p1.dec_precio_prenda > p2.dec_precio_prenda) ? -1 : 0);
-                        renderCatalogo(mayores);
-                        data_actual = mayores;
+                        data_actual = mayores.slice();
                         break;
                 }
+                renderCatalogo(data_actual);
             }
         });
         //delegación del evento click para los detalles de los producto
@@ -146,9 +193,11 @@ import { ajax } from './ajax.js';       //importando funcion ajax
                 const eg = $modal_contenido.querySelector('.EG');
                 //funcion para agregar la clase active a los labels seleccionados y remover al label anterior a este
                 const addRmvTalla = (ntalla, otalla) => {
-                    ntalla.classList.add('label_active');
-                    if (otalla) otalla.classList.remove('label_active');
-                    return ntalla;
+                    if (ntalla !== otalla) {
+                        ntalla.classList.add('label_active');
+                        if (otalla) otalla.classList.remove('label_active');
+                        return ntalla;
+                    } else return ntalla;
                 };
                 //acciones para cada elemento que haya lanzado el evento
                 switch (e.target.id) {
@@ -184,27 +233,43 @@ import { ajax } from './ajax.js';       //importando funcion ajax
                 //En caso de que se haya seleccionado una talla y un color
                 if (talla && color) {
                     variante = producto.variantes_producto.find(v => v.txt_color_prenda === color && v.txt_talla_prenda === talla);
-                    //En caso de que no existan variantes del producto o ya no existan unidades
+                    //En caso de que no existan variantes del producto
                     if (!variante || variante.int_cantidad_prenda === 0) {
                         $modal_carrito.classList.add('disabled');
                         $modal_existencias.classList.remove('invisible');
+                        $modal_existencias.textContent = "Sin Existencias";
                     } else {
                         $modal_carrito.classList.remove('disabled');
-                        $modal_existencias.classList.add('invisible');
+                        $modal_existencias.classList.remove('invisible');
+                        $modal_existencias.textContent = `Existencias: ${variante.int_cantidad_prenda}`;
+
                     }
                 }
             }
         });
         //asignación del evento click para agregar productos al carrito
         $modal_carrito.addEventListener('click', e => {
-            try {                
-                const carrito = producto;   //creamos una copia del producto que se desea agregar al carrito
-                carrito.variantes_producto = variante; 
-                const key = `${carrito.variantes_producto.txt_id_variante}${Date.now()}`;  //key para el producto en el LocalStorage
-                localStorage.setItem(key, JSON.stringify(carrito));      //enviamos el producto al LocalStorage
-                limpiaModal()
+            try {
+                //validación en caso de que se acceda al boton por otro metodo
+                if (variante && variante.int_cantidad_prenda > 0) {
+                    const carrito = deepClone(producto);   //creamos una copia del producto que se desea agregar al carrito
+                    carrito.variantes_producto = deepClone(variante);
+                    const key = `${carrito.variantes_producto.txt_id_variante}${Date.now()}`;  //key para el producto en el LocalStorage
+                    localStorage.setItem(key, JSON.stringify(carrito));      //enviamos el producto al LocalStorage
+                    --variante.int_cantidad_prenda; //disminuimos una unidad manualmente de la data actual del lado del cliente
+                    limpiaModal();
+                    alert("Lo tienes!", `Tu producto se agrego al carrito con &eacute;xito`, "success");
+                } else throw 666
             } catch (err) {
-                console.log(err);
+                if (err === 666) {
+                    //Alerta en caso de que se haya intentado agregar productos al carrito por un metodo indebido
+                    alert("FBI", "We are coming for you...", "danger");
+                    console.log(err);
+                } else {
+                    //Alerta en caso de que haya un error al agregar productos al carrito
+                    alert("Algo salio mal...", `Tu producto no pudo ser agregado al carrito, intentalo m&aacute;s tarde`, "danger");
+                    console.log(err);
+                }
             }
         });
         //evento de cierre del modal

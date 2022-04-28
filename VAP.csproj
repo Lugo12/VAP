@@ -118,6 +118,7 @@
     <Content Include="Recursos\css\normalize.css" />
     <Content Include="Recursos\icon\VAP_Logo.ico" />
     <Content Include="Recursos\js\ajax.js" />
+    <Content Include="Recursos\js\alerta.js" />
     <Content Include="Recursos\js\catalogo.js" />
     <Content Include="Recursos\js\perfil.js" />
     <Content Include="Recursos\js\responsive.js" />

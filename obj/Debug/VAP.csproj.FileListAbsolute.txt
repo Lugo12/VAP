@@ -58,8 +58,8 @@ C:\Users\luis-\source\repos\VAP\bin\EntityFramework.xml
 C:\Users\luis-\source\repos\VAP\bin\EntityFramework.SqlServer.xml
 C:\Users\luis-\source\repos\VAP\bin\Newtonsoft.Json.xml
 C:\Users\luis-\source\repos\VAP\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\luis-\source\repos\VAP\obj\Debug\VAP.csproj.AssemblyReference.cache
 C:\Users\luis-\source\repos\VAP\obj\Debug\VAP.csproj.CoreCompileInputs.cache
 C:\Users\luis-\source\repos\VAP\obj\Debug\VAP.csproj.CopyComplete
 C:\Users\luis-\source\repos\VAP\obj\Debug\VAP.dll
 C:\Users\luis-\source\repos\VAP\obj\Debug\VAP.pdb
-C:\Users\luis-\source\repos\VAP\obj\Debug\VAP.csproj.AssemblyReference.cache

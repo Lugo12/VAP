@@ -26,7 +26,7 @@
         <a href="../Default.aspx" class="logo"><img src="../Imagenes/VAP_Logo.png" alt="Logo"></a>
       </div>
       <div class="busqueda">
-        <input type="text" placeholder="¿Qué estas buscando?">
+        <input type="text" placeholder=" ¿Qué estas buscando?">
         <button class="lupa" type="button">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
@@ -67,8 +67,10 @@
     <main class="main">
         <form id="form1" runat="server">
           <div class="contenido">
+              <div class="mensaje mensaje_catalogo oculto"><h2></h2></div>
               <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
               </asp:ContentPlaceHolder>
+              <div class="alerta oculto" id="alerta"></div>
           </div>
         </form>
     </main>
