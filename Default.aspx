@@ -1,13 +1,11 @@
 ﻿<%@ Page Title="Catálogo" Language="C#" MasterPageFile="~/MasterPages/MasterPageCliente.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="VAP.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
     <section class="base head head_catalogo oculto">
-
         <div class="btn-group catalogo_tipo" role="group" aria-label="Button group with nested dropdown">
             <button type="button" class="btn btn-primary">Tipo</button>
             <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                     <a class="dropdown-item" id="flt_Todo" href="#">Todo</a>
                     <a class="dropdown-item" id="flt_Sudadera" href="#">Sudadera</a>
                     <a class="dropdown-item" id="flt_Playera" href="#">Playera</a>
@@ -18,16 +16,14 @@
             <button type="button" class="btn btn-primary">Ordenar por</button>
             <div class="btn-group" role="group">
                 <button id="btnGroupDrop2" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop2" style="">
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
                     <a class="dropdown-item" id="ob_Menor" href="#">Menor Precio</a>
                     <a class="dropdown-item" id="ob_Mayor" href="#">Mayor Precio</a>
                 </div>
             </div>
         </div>
     </section>
-
     <section class="body_catalogo oculto"></section>
-
     <div class="modal fade" id="modal_detalles" tabindex="-1" aria-labelledby="titulo_modal_detalles" aria-hidden="true">
         <div class="producto_modal modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -81,7 +77,6 @@
             </div>
         </div>
     </div>
-
     <template id="template_catalogo">
         <div class="producto_catalogo card text-white bg-dark">
             <div class="header_producto card-header"></div>
@@ -95,6 +90,5 @@
             <button type="button" class="boton detalles_producto btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_detalles">Detalles</button>
         </div>
     </template>
-
     <script type="module" src="Recursos/js/catalogo.js"></script>
 </asp:Content>

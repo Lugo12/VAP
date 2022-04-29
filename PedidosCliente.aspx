@@ -6,7 +6,4 @@
 
     <section class="base body_pedido_cliente"></section> 
 
-    <div class="mensaje mensaje_pedido_cliente oculto">
-        <h2>Parece que no tienes pedidos por el momento</h2>
-    </div>
 </asp:Content>

@@ -67,13 +67,17 @@
     <main class="main">
         <form id="form1" runat="server">
           <div class="contenido">
-              <div class="mensaje mensaje_catalogo oculto"><h2></h2></div>
+              <div class="mensaje oculto"><h2></h2></div>
               <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
               </asp:ContentPlaceHolder>
               <div class="alerta oculto" id="alerta"></div>
           </div>
         </form>
     </main>
+    <footer>
+        <h5>¿Encajar en la sociedad ó ser feliz? No busques más, en VAP tenemos lo que te gusta</h5>
+        <h6>Todos los dereches reservados &reg;VAP</h6>
+    </footer>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

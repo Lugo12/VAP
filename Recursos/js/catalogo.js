@@ -1,9 +1,10 @@
 import { ajax } from './ajax.js';       //importando funcion ajax
-import { alert } from './alerta.js';       //importando funcion ajax
+import { alert } from './alerta.js';       //importando funcion alert
+import { visible, invisible } from './vista.js';       //importando funcion de la vista
+import { deepClone } from './deepClone.js';       //importando funcion para clonar objetos profundos
 (function () {
     const $head = document.querySelector('.head_catalogo'),
-        $body = document.querySelector('.body_catalogo'),
-        $mensaje = document.querySelector('.mensaje_catalogo');
+        $body = document.querySelector('.body_catalogo');
     //funcion ajax para traer productos a la vista
     ajax(
         'POST',
@@ -13,7 +14,7 @@ import { alert } from './alerta.js';       //importando funcion ajax
             //Validación en caso de excepción en lugar de datos esperados
             if (!data.ClassName) data.length === 0 ? falla() : peticionExitosa(comparaCarrito(data))
             else {
-                falla()
+                falla();
                 console.log("Excepcion del lado del servidor:", data);
             }
         },
@@ -27,9 +28,7 @@ import { alert } from './alerta.js';       //importando funcion ajax
         //si el localStorage es igual a 0 omitimos esta funcion, si no entramos a su funcionamiento
         if (localStorage.length > 0) {
             const keys = [];    //arreglo de todas las llaves que hay en el localStorage
-            for (let key = 0; key < localStorage.length; key++) {
-                keys.push(localStorage.key(key));
-            }
+            for (let key = 0; key < localStorage.length; key++) keys.push(localStorage.key(key));
             data.forEach(producto => {
                 producto.variantes_producto.forEach(variante => {
                     keys.forEach(key => {
@@ -45,18 +44,9 @@ import { alert } from './alerta.js';       //importando funcion ajax
         } else return data;
     }
     //render de vista en caso de fracaso
-    const falla = () => {       
-        $head.classList.add('oculto');
-        $body.classList.add('oculto');
-        $mensaje.classList.remove('oculto');
-        $mensaje.querySelector('h2').textContent = "Parece que no hay productos por el momento";
-    };
+    const falla = () => invisible($head, $body,"Parece que no hay productos por el momento");
     //render de vista en caso de exito
-    const exito = () => {       
-        $head.classList.remove('oculto');
-        $body.classList.remove('oculto');
-        $mensaje.classList.add('oculto');
-    };
+    const exito = () => visible($head, $body);
     //render de productos en pantalla
     const renderCatalogo = data => {        
         $body.innerHTML = "";       //reinicio de la vista
@@ -122,19 +112,6 @@ import { alert } from './alerta.js';       //importando funcion ajax
                 $modal_precio.textContent = `$MXN${producto.dec_precio_prenda}`;
                 $modal_concepto.textContent = producto.txt_concepto_prenda;
             }
-        }
-        //funcion para clonar objetos profundos
-        const deepClone = objeto => {
-            const clon = {};
-            for (let key in objeto) {
-                let valor = objeto[key];
-                if (typeof (valor) !== 'object') {
-                    clon[key] = valor;
-                } else {
-                    clon[key] = deepClone(valor);
-                }
-            }
-            return clon;
         }
         //Efecto al pasar el mouse sobre una imagen
         $body.addEventListener('mouseover', e => {
@@ -258,7 +235,7 @@ import { alert } from './alerta.js';       //importando funcion ajax
                     localStorage.setItem(key, JSON.stringify(carrito));      //enviamos el producto al LocalStorage
                     --variante.int_cantidad_prenda; //disminuimos una unidad manualmente de la data actual del lado del cliente
                     limpiaModal();
-                    alert("Lo tienes!", `Tu producto se agrego al carrito con &eacute;xito`, "success");
+                    alert("Lo tienes!", `Tu producto se agrego al carrito con &eacute;xito`, "info");
                 } else throw 666
             } catch (err) {
                 if (err === 666) {
