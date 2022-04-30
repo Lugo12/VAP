@@ -11,7 +11,7 @@
   <link rel="shortcut icon" href="../Recursos/icon/VAP_Logo.ico">
   <link href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../Recursos/css/normalize.css">
-  <link rel="stylesheet" href="../Recursos/css/estilos.css">
+  <link rel="stylesheet" href="../Recursos/css/estilos.css"/>
   <link rel="stylesheet" href="../Recursos/css/bootstrap.min.css" /> 
   <script src="https://kit.fontawesome.com/e650e71a85.js"></script>
 </head>
@@ -37,7 +37,7 @@
         </button>
       </div>
       <div class="botones_der">
-        <a href="../Carrito.aspx" class="btn_der"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="../Carrito.aspx" class="btn_der"><span id="no_carrito"></span><i class="fa-solid fa-cart-shopping"></i></a>
         <a href="../Perfil.aspx" class="btn_der on-session"><i class="fa-solid fa-circle-user"></i></a>
         <a href="#" class="btn_der sign-in"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
       </div>

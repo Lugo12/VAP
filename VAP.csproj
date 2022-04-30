@@ -124,6 +124,7 @@
     <Content Include="Recursos\js\deepClone.js" />
     <Content Include="Recursos\js\perfil.js" />
     <Content Include="Recursos\js\responsive.js" />
+    <Content Include="Recursos\js\tooltip.js" />
     <Content Include="Recursos\js\vista.js" />
     <Content Include="Web.config" />
   </ItemGroup>

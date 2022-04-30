@@ -236,6 +236,7 @@ import { deepClone } from './deepClone.js';       //importando funcion para clon
                     --variante.int_cantidad_prenda; //disminuimos una unidad manualmente de la data actual del lado del cliente
                     limpiaModal();
                     alert("Lo tienes!", `Tu producto se agrego al carrito con &eacute;xito`, "info");
+                    document.getElementById('no_carrito').textContent = localStorage.length;    //se restablece la cantidad de elementos en el carrito
                 } else throw 666
             } catch (err) {
                 if (err === 666) {

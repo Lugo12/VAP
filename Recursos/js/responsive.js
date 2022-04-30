@@ -12,3 +12,5 @@ lupa2.addEventListener('click', () => {
   lupa2.classList.toggle('lupa2_focus');
   document.querySelector('header').classList.toggle('header_responsive');
 });
+//funcion para mostrar existencias en el carrito
+(() => document.getElementById('no_carrito').textContent = localStorage.length)();

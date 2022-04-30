@@ -6,10 +6,22 @@
     <section class="base body_carrito oculto"></section>
     <template id="template_carrito">
         <div class="producto_carrito card text-white">
-            <div class="header_carrito card-header"></div>
+            <div class="card-header">
+                <h4 class="header_carrito"></h4>
+            </div>
             <div class="body_carrito card-body">
-                <h4 class="precio_carrito card-title"></h4>
+                <div class="image_carrito"><img src="#" alt="<image failed>"/></div>
+                <h5 class="precio_carrito card-text"></h5>
                 <p class="texto_carrito card-text"></p>
+                <h6 class="cantidad_carrito card-text"></h6>
+                <div class="acciones_carrito">
+                    <button type="button" class="boton del" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar uno">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <button type="button" class="boton del_All oculto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Eliminar todo">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </template>
