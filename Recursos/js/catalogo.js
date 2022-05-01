@@ -14,8 +14,8 @@ import { deepClone } from './deepClone.js';       //importando funcion para clon
             //Validación en caso de excepción en lugar de datos esperados
             if (!data.ClassName) data.length === 0 ? falla() : peticionExitosa(comparaCarrito(data))
             else {
-                falla();
                 console.log("Excepcion del lado del servidor:", data);
+                falla();
             }
         },
         error => {
@@ -58,7 +58,6 @@ import { deepClone } from './deepClone.js';       //importando funcion para clon
             $template.querySelector('.image_producto').childNodes[1].src = `${producto.img_negro_prenda}`;
             $template.querySelector('.image_producto').childNodes[1].dataset.id = producto.id_prenda;
             $template.querySelector('.title_producto').textContent = `$MXN${producto.dec_precio_prenda}`;
-            $template.querySelector('.text_producto').textContent = producto.txt_concepto_prenda;
             $template.querySelector('.detalles_producto').dataset.id = producto.id_prenda;
             let $clone = document.importNode($template, true);  //creamos un clon del template y le asegnamos valores a sus atributos
             $fragment.appendChild($clone);      //agregamos el template a un fragmento
@@ -100,34 +99,24 @@ import { deepClone } from './deepClone.js';       //importando funcion para clon
                 talla_actual = null;    //reinicio de la variable que almacena la talla actual seleccionada
             }
         }
-        //funcion para mostrar los detalles del producto en el modal
-        const detallesModal = e => {
-            const $detalles = Array.from(document.querySelectorAll('.detalles_producto'));      //arreglo de los botones de detalles que existen            
-            const $imagenes = Array.from($body.getElementsByTagName('img'));      //arreglo de los imagenes de los productos mostrados
-            //En caso de que el boton detalles haya lanzado el evento               
-            if ($detalles.includes(e.target) || $imagenes.includes(e.target)) {
-                producto = data_actual.find(p => p.id_prenda === parseInt(e.target.dataset.id));
-                $modal_titulo.textContent = `${producto.txt_tipo_prenda} - ${producto.txt_marca_prenda}`;
-                $modal_imagen.src = `${producto.img_negro_prenda}`;
-                $modal_precio.textContent = `$MXN${producto.dec_precio_prenda}`;
-                $modal_concepto.textContent = producto.txt_concepto_prenda;
-            }
-        }
-        //Efecto al pasar el mouse sobre una imagen
-        $body.addEventListener('mouseover', e => {
+        //Delegación del evento al pasar el mouse sobre una imagen
+        document.addEventListener('mouseover', e => {
             const $imagenes = Array.from($body.getElementsByTagName('img'));
             //En caso de que se pase el raton encima de la imagen de cada objeto
             if ($imagenes.includes(e.target)) e.target.parentNode.parentNode.classList.add('efecto_producto')
         });
-        //Efecto al retirar el mouse de una imagen
-        $body.addEventListener('mouseout', e => {
+        //Delegación del evento al retirar el mouse de una imagen
+        document.addEventListener('mouseout', e => {
             const $imagenes = Array.from($body.getElementsByTagName('img'));
             //En caso de que se pase el raton encima de la imagen de cada objeto
             if ($imagenes.includes(e.target)) e.target.parentNode.parentNode.classList.remove('efecto_producto')
         });
-        //delegación del evento click en la cabecera del catalogo
-        $head.addEventListener('click', e => {      
-            const $filtros = Array.from($head.getElementsByTagName('a'));
+        //delegación del evento click en el catagolo
+        document.addEventListener('click', e => {
+            const $filtros = Array.from($head.getElementsByTagName('a'));       //arreglo de los filtros
+            const $detalles = Array.from(document.querySelectorAll('.detalles_producto'));      //arreglo de los botones de detalles que existen            
+            const $imagenes = Array.from($body.getElementsByTagName('img'));      //arreglo de los imagenes de los productos mostrados
+            const $radios = Array.from($modal_contenido.getElementsByTagName('input'));     //arreglo de los input:radio del modal
             //En caso de que los filtros hayan lanzado el evento
             if ($filtros.includes(e.target)) {
                 //acciones para cada elemento que haya lanzado el evento
@@ -155,15 +144,15 @@ import { deepClone } from './deepClone.js';       //importando funcion para clon
                         break;
                 }
                 renderCatalogo(data_actual);
-            }
-        });
-        //delegación del evento click para los detalles de los producto
-        $body.addEventListener('click', e => detallesModal(e));
-        //delegación del evento click para las acciones en el modal
-        $modal_contenido.addEventListener('click', e => {      
-            const $radios = Array.from($modal_contenido.getElementsByTagName('input'));     //arreglo de los input:radio del modal
-            //En caso de que cualquier input del modal haya lanzado el evento
-            if ($radios.includes(e.target)) {       
+            } else if ($detalles.includes(e.target) || $imagenes.includes(e.target)) {
+                //En caso de que el boton detalles haya lanzado el evento
+                producto = data_actual.find(p => p.id_prenda === parseInt(e.target.dataset.id));
+                $modal_titulo.textContent = `${producto.txt_tipo_prenda} - ${producto.txt_marca_prenda}`;
+                $modal_imagen.src = `${producto.img_negro_prenda}`;
+                $modal_precio.textContent = `$MXN${producto.dec_precio_prenda}`;
+                $modal_concepto.textContent = producto.txt_concepto_prenda;
+            } else if ($radios.includes(e.target)) {
+                //En caso de que cualquier input del modal haya lanzado el evento
                 const ch = $modal_contenido.querySelector('.CH');
                 const m = $modal_contenido.querySelector('.M');
                 const g = $modal_contenido.querySelector('.G');
@@ -222,34 +211,33 @@ import { deepClone } from './deepClone.js';       //importando funcion para clon
 
                     }
                 }
-            }
-        });
-        //asignación del evento click para agregar productos al carrito
-        $modal_carrito.addEventListener('click', e => {
-            try {
-                //validación en caso de que se acceda al boton por otro metodo
-                if (variante && variante.int_cantidad_prenda > 0) {
-                    const carrito = deepClone(producto);   //creamos una copia del producto que se desea agregar al carrito
-                    carrito.variantes_producto = deepClone(variante);
-                    const key = `${carrito.variantes_producto.txt_id_variante}${Date.now()}`;  //key para el producto en el LocalStorage
-                    localStorage.setItem(key, JSON.stringify(carrito));      //enviamos el producto al LocalStorage
-                    --variante.int_cantidad_prenda; //disminuimos una unidad manualmente de la data actual del lado del cliente
-                    limpiaModal();
-                    alert("Lo tienes!", `Tu producto se agrego al carrito con &eacute;xito`, "info");
-                    document.getElementById('no_carrito').textContent = localStorage.length;    //se restablece la cantidad de elementos en el carrito
-                } else throw 666
-            } catch (err) {
-                if (err === 666) {
-                    //Alerta en caso de que se haya intentado agregar productos al carrito por un metodo indebido
-                    alert("FBI", "We are coming for you...", "danger");
-                    console.log(err);
-                } else {
-                    //Alerta en caso de que haya un error al agregar productos al carrito
-                    alert("Algo salio mal...", `Tu producto no pudo ser agregado al carrito, intentalo m&aacute;s tarde`, "danger");
-                    console.log(err);
+            } else if (e.target == $modal_carrito) {
+                //En caso de que el botón de agregar al carrito haya lanzado el evento
+                try {
+                    //validación en caso de que se acceda al boton por otro metodo
+                    if (variante && variante.int_cantidad_prenda > 0) {
+                        const carrito = deepClone(producto);   //creamos una copia del producto que se desea agregar al carrito
+                        carrito.variantes_producto = deepClone(variante);
+                        const key = `${carrito.variantes_producto.txt_id_variante}${Date.now()}`;  //key para el producto en el LocalStorage
+                        localStorage.setItem(key, JSON.stringify(carrito));      //enviamos el producto al LocalStorage
+                        --variante.int_cantidad_prenda; //disminuimos una unidad manualmente de la data actual del lado del cliente
+                        limpiaModal();
+                        alert("Lo tienes!", `Tu producto se agrego al carrito con &eacute;xito`, "info");
+                        document.getElementById('no_carrito').textContent = localStorage.length;    //se restablece la cantidad de elementos en el carrito
+                    } else throw 666
+                } catch (err) {
+                    if (err === 666) {
+                        //Alerta en caso de que se haya intentado agregar productos al carrito por un metodo indebido
+                        alert("FBI", "We are coming for you...", "danger");
+                        console.log(err);
+                    } else {
+                        //Alerta en caso de que haya un error al agregar productos al carrito
+                        alert("Algo salio mal...", `Tu producto no pudo ser agregado al carrito, intentalo m&aacute;s tarde`, "danger");
+                        console.log(err);
+                    }
                 }
             }
-        });
+        });        
         //evento de cierre del modal
         $modal.addEventListener('hidden.bs.modal', limpiaModal);
     };

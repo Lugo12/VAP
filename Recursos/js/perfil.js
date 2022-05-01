@@ -19,15 +19,16 @@ const por_default = () => {
     $inputs.forEach((input) => input.classList.add('oculto'));
     $labels.forEach((label) => label.classList.remove('oculto'));
 };
-//vista del perfil al editar
-$editar.addEventListener('click', () => {      
-    $editar.classList.add('oculto');
-    $cancelar.classList.remove('oculto');
-    $guardar.classList.remove('oculto');
-    $inputs.forEach((input) => input.classList.remove('oculto'));
-    $labels.forEach((label) => label.classList.add('oculto'));
+//delegación del evento click en el boton editar, cancelar y guardar
+document.addEventListener('click', e => {
+    if (e.target === $cancelar) por_default();
+    else if (e.target === $editar) {
+        $editar.classList.add('oculto');
+        $cancelar.classList.remove('oculto');
+        $guardar.classList.remove('oculto');
+        $inputs.forEach((input) => input.classList.remove('oculto'));
+        $labels.forEach((label) => label.classList.add('oculto'));
+    } else if (e.target === $guardar) {
+
+    }
 });
-//boton cancelar
-$cancelar.addEventListener('click', () => por_default());   
-//boton guardar
-$editar.addEventListener('submit', () => { });      

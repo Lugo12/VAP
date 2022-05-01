@@ -84,10 +84,9 @@
                 <img src="#" alt="<image failed>" data-bs-toggle="modal" data-bs-target="#modal_detalles">
             </div>
             <div class="card-body">
-                <h4 class="title_producto card-title"></h4>    
-                <p class="text_producto card-text"></p>
+                <h3 class="title_producto card-title"></h3>    
             </div>
-            <button type="button" class="boton detalles_producto btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_detalles">Detalles</button>
+            <button type="button" class="boton detalles_producto btn" data-bs-toggle="modal" data-bs-target="#modal_detalles">Detalles</button>
         </div>
     </template>
     <script type="module" src="Recursos/js/catalogo.js"></script>

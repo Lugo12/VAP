@@ -8,65 +8,60 @@ namespace VAP
 {
     public partial class Default : System.Web.UI.Page
     {
-        static string json;     //string que sera enviado a la parte del cliente
+        static string json = null, busqueda = null;  
         protected void Page_Load(object sender, EventArgs e)
         {
-            BuscarProductos();
+            
         }
-        protected void BuscarProductos()
+        private static void Busqueda()
         {
             //uso de entity framework
             using (VAP_ProjectEntities db = new VAP_ProjectEntities())
             {
                 try
                 {
-                    var dbProductos = db.producto.Where(d => d.txt_estado_prenda == "vigente");     //Select de la tabla productos.
-                    //Evaluamos si hay elementos en el arreglo obtenido
-                    if(dbProductos.ToArray().Length > 0)
+                    //Select de la tabla productos
+                    var dbProductos = db.producto.Where(d => d.txt_estado_prenda == "vigente");
+                    //Cuando hay una busqueda que filtrar
+                    if (busqueda != null)
                     {
-                        List<producto> productos = new List<producto>();
-                        foreach (var oProducto in dbProductos)
-                        {
-                            List<variantes_producto> variantes = new List<variantes_producto>();
-                            var dbVariantes = db.variantes_producto.Where(d => d.id_prenda == oProducto.id_prenda && d.int_cantidad_prenda > 0);
-                            foreach (var oVariante in dbVariantes)
-                            {
-                                //por cada variante de un producto la almacenamos en una Lista
-                                variantes.Add(new variantes_producto
-                                {
-                                    id_prenda = oVariante.id_prenda,
-                                    id_variante = oVariante.id_variante,
-                                    int_cantidad_prenda = oVariante.int_cantidad_prenda,
-                                    txt_id_variante = oVariante.txt_id_variante,
-                                    txt_talla_prenda = oVariante.txt_talla_prenda,
-                                    txt_color_prenda = oVariante.txt_color_prenda
-                                });
-                            }
-                            //por cada producto de la tabla lo almacenamos en la lista de objetos
-                            productos.Add(new producto
-                            {
-                                id_prenda = oProducto.id_prenda,
-                                txt_tipo_prenda = oProducto.txt_tipo_prenda,
-                                txt_concepto_prenda = oProducto.txt_concepto_prenda,
-                                txt_marca_prenda = oProducto.txt_marca_prenda,
-                                dec_precio_prenda = oProducto.dec_precio_prenda,
-                                img_blanco_prenda = oProducto.img_blanco_prenda,
-                                img_negro_prenda = oProducto.img_negro_prenda,
-                                txt_estado_prenda = oProducto.txt_estado_prenda,
-                                variantes_producto = variantes     //almacenamos todas las variantes de un producto
-                            });
-                        }
-                        json = JsonConvert.SerializeObject(productos, Formatting.Indented);     //Parseamos la lista a formato JSON
-                    }else json = "[]";
+                        dbProductos = from d in db.producto
+                                      where d.txt_estado_prenda == "vigente"
+                                      && d.txt_concepto_prenda.Contains(busqueda)
+                                      || d.txt_marca_prenda.Contains(busqueda)
+                                      || d.dec_precio_prenda.ToString().Contains(busqueda)
+                                      select d;
+                    }
+                    //asignamos lo que nos trajo la base de datos a la variable que enviaremos al servidor
+                    json = JsonConvert.SerializeObject(dbProductos.ToList(), Formatting.Indented, new JsonSerializerSettings
+                    {
+                        PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    });
                 }
-                catch (Exception e)
+                catch (Exception evento)
                 {
-                    json = JsonConvert.SerializeObject(e, Formatting.Indented);
+                    json = JsonConvert.SerializeObject(evento, Formatting.Indented);
                 }
-
+                busqueda = null;    //reiniciamos la variable de busqueda
             }
         }
         [WebMethod]
-        public static string GetCatalogo() { return json; }     //Envio de la cadena JSON al cliente
+        public static string GetCatalogo() {
+            Busqueda();
+            return json; 
+        }     //Envio de la cadena JSON al cliente
+        [WebMethod]
+        public static bool GetBusqueda(string busqueda)     //Recibe la información de la busqueda
+        {
+            try
+            {
+                Default.busqueda = busqueda;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }            
+        }
     }
 }
