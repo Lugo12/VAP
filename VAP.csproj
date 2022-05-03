@@ -122,8 +122,9 @@
     <Content Include="Recursos\js\carrito.js" />
     <Content Include="Recursos\js\catalogo.js" />
     <Content Include="Recursos\js\deepClone.js" />
+    <Content Include="Recursos\js\login.js" />
     <Content Include="Recursos\js\perfil.js" />
-    <Content Include="Recursos\js\responsive.js" />
+    <Content Include="Recursos\js\main.js" />
     <Content Include="Recursos\js\tooltip.js" />
     <Content Include="Recursos\js\vista.js" />
     <Content Include="Web.config" />

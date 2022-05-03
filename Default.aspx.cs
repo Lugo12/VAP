@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Services;
 using Newtonsoft.Json;
+using System.Web;
 
 namespace VAP
 {
     public partial class Default : System.Web.UI.Page
     {
-        static string json = null, busqueda = null;  
+        static string json = null, busqueda = null;
+        public static string cliente = null;  
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -44,14 +46,64 @@ namespace VAP
                 }
                 busqueda = null;    //reiniciamos la variable de busqueda
             }
+        }   //Metodo para buscar la lista de productos
+        private static string Registro(string nombre, string apellidos, string telefono, string correo, string password)
+        {
+            try
+            {
+                using(VAP_ProjectEntities db = new VAP_ProjectEntities())
+                {
+                    var estado = "";
+                    if (db.ComprobarPass(correo).ToList().Count > 0) estado = "correo_existente";
+                    else {
+                        db.CrearCliente(nombre, apellidos, long.Parse(telefono), correo, password);
+                        db.SaveChanges();
+                        cliente = JsonConvert.SerializeObject(db.ComprobarPass(correo).ToList(), Formatting.Indented);
+                        estado = "logueado";
+                    }
+                    return JsonConvert.SerializeObject(estado, Formatting.Indented);
+                }
+            }catch(Exception e)
+            {
+                return JsonConvert.SerializeObject(e, Formatting.Indented);
+            }
         }
+        //Función para saber si el correo ya fue agregado
+        private static string Logueo(string correo, string password)
+        {            
+            try
+            {
+                using (VAP_ProjectEntities db = new VAP_ProjectEntities())
+                {
+                    var respuesta = db.ComprobarPass(correo).ToList();
+                    var estado = "";
+                    if (respuesta.Count > 0)
+                    {
+                        if (respuesta.Contains(respuesta.Find(d => d.Pass == password)))
+                        {
+                            cliente = JsonConvert.SerializeObject(respuesta, Formatting.Indented);
+                            estado = "logueado";
+                        }
+                        else estado = "password_error";
+                    }
+                    else estado = "correo_error";
+                    return JsonConvert.SerializeObject(estado,Formatting.Indented);
+                }
+            }
+            catch (Exception e)
+            {
+                return JsonConvert.SerializeObject(e, Formatting.Indented);
+            }
+        }
+        //Funciones que solicita el cliente
         [WebMethod]
-        public static string GetCatalogo() {
+        public static string GetCatalogo()
+        {
             Busqueda();
-            return json; 
-        }     //Envio de la cadena JSON al cliente
+            return json;
+        }       //Envio de la cadena JSON al cliente
         [WebMethod]
-        public static bool GetBusqueda(string busqueda)     //Recibe la información de la busqueda
+        public static bool SetBusqueda(string busqueda)
         {
             try
             {
@@ -61,7 +113,28 @@ namespace VAP
             catch (Exception)
             {
                 return false;
-            }            
-        }
+            }
+        }       //Recibe la información de la busqueda
+        [WebMethod]
+        public static string SetCliente(string nombre, string apellidos, string telefono, string correo, string password)
+        {
+            return Registro(nombre, apellidos, telefono, correo, password);
+        }       //Recibe la información del cliente para su registro
+        [WebMethod]
+        public static string GetCliente(string correo, string password)
+        {
+            return Logueo(correo, password);
+        }       //Recibe la información del cliente para su logueo
+        [WebMethod]
+        public static string ExistCliente()
+        {
+            return cliente;
+        }   //Comprobamos si existe un cliente logueado
+        [WebMethod]
+        public static bool CerrarSesion()
+        {
+            cliente = null;
+            return true;
+        }   //Cerramos Sesion
     }
 }

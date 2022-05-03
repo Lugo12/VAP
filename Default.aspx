@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Catálogo" Language="C#" MasterPageFile="~/MasterPages/MasterPageCliente.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="VAP.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%--HEADER FILTROS Y ORDERBY--%>
     <section class="base head head_catalogo oculto">
         <div class="btn-group catalogo_tipo" role="group" aria-label="Button group with nested dropdown">
             <button type="button" class="btn btn-primary">Tipo</button>
@@ -23,7 +24,9 @@
             </div>
         </div>
     </section>
+    <%--BODY DEL CATALOGO--%>
     <section class="body_catalogo oculto"></section>
+    <%--MODAL DETALLES--%>
     <div class="modal fade" id="modal_detalles" tabindex="-1" aria-labelledby="titulo_modal_detalles" aria-hidden="true">
         <div class="producto_modal modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -77,6 +80,7 @@
             </div>
         </div>
     </div>
+    <%--TEMPLATE PRODUCTOS--%>
     <template id="template_catalogo">
         <div class="producto_catalogo card text-white bg-dark">
             <div class="header_producto card-header"></div>

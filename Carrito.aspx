@@ -1,9 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/MasterPageCliente.Master" AutoEventWireup="true" CodeBehind="Carrito.aspx.cs" Inherits="VAP.Carrito" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%--HEADER CARRITO--%>
     <section class="base head_carrito oculto">
         <h2>Mi Carrito</h2>
     </section>
+    <%--BODY CARRITO--%>
     <section class="base body_carrito oculto"></section>
+    <%--TEMPLATE CARRITO--%>
     <template id="template_carrito">
         <div class="producto_carrito card text-white">
             <div class="card-header">

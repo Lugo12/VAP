@@ -2,6 +2,7 @@
 import { alert } from './alerta.js';       //importando funcion alert
 import { visible, invisible } from './vista.js';       //importando funcion de la vista
 import { tooltip } from './tooltip.js';       //importando funcion de los tooltip
+import login from './login.js';
 (function () {
     const $head = document.querySelector('.head_carrito'),
         $body = document.querySelector('.body_carrito');
@@ -102,13 +103,18 @@ import { tooltip } from './tooltip.js';       //importando funcion de los toolti
                 document.getElementById('no_carrito').textContent = localStorage.length;    //se restablece la cantidad de elementos en el carrito
             }
             if (e.target === document.getElementById('btn_Pedido')) {
-                const $loginModal = document.getElementById('loginModal');
-                if (cliente) {
+                const $modal = new bootstrap.Modal(document.getElementById('modal_main'));
+                login(() => {
+                    const valores = [];
+                    //llenamos el arreglo que vamos a mandar al servidor
+                    values.forEach(producto => {
+                        valores.push({ int_carrito: (producto.int_carrito) ? producto.int_carrito:"1", txt_id_variante: producto.variantes_producto.txt_id_variante })
+                    });
                     //información que se va a enviar al servidor
                     const data = {
-                        productos: values,
+                        productos: valores,
                         total: totalCarrito,
-                        cliente: cliente.id
+                        id: JSON.parse(sessionStorage.getItem('cliente')).id_cliente
                     }
                     //funcion ajax para traer productos a la vista
                     ajax(
@@ -116,19 +122,22 @@ import { tooltip } from './tooltip.js';       //importando funcion de los toolti
                         'Carrito.aspx/GetCarrito',
                         JSON.stringify(data),
                         data => {
-                            if (data) {
+                            if (data === "Ok") {
                                 localStorage.clear();   //Eliminamos los productos del localStorage
                                 renderCarrito([])   //se vuelve a renderizar el carrito
                                 document.getElementById('no_carrito').textContent = localStorage.length;    //se restablece la cantidad de elementos en el carrito
                                 alert("Ordenado!", "Tu pedido esta pendiente", "info");
-                            } else alert("Ocurrio un error", "Algo salio mal.. Intentalo de nuevo m&aacute;s tarde", "danger");
+                            } else {
+                                console.log(data);
+                                alert("Ocurrio un error", "Algo salio mal.. Intentalo de nuevo m&aacute;s tarde", "danger");
+                            }
                         },
                         error => {
                             console.error(error);
                             alert("Error", "Algo salio mal.. Intentalo de nuevo m&aacute;s tarde", "danger");
                         }
                     );
-                } else $loginModal.show();
+                }, () => $modal.show());
             } else if ($btn_del.includes(e.target)) {
                 //En el caso de que el evento click se haya hecho en el boton de borrar un elemento
                 try {

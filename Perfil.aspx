@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/MasterPageCliente.Master" AutoEventWireup="true" CodeBehind="Perfil.aspx.cs" Inherits="VAP.Perfil" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%--PERFIL--%>
     <section class="perfil">
         <h3>Información del usuario</h3>
         <article class="datos nombre">
@@ -28,6 +29,5 @@
             <input type="submit" class="btn btn-success btn_perfil oculto" id="guardarPerfil" value="Guardar" />
         </article>
     </section>
-
     <script src="Recursos/js/perfil.js"></script>
 </asp:Content>

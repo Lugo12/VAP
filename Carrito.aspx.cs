@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web.Services;
 
 namespace VAP
@@ -10,16 +12,30 @@ namespace VAP
         {
 
         }
-
+        //clase para usar las propiedades de los objetos producto que vienen del cliente
+        public class ProductoFiltrado
+        {
+            private string int_carrito;
+            private string txt_id_variante;
+            public string Int_carrito { get => int_carrito; set => int_carrito = value; }
+            public string Txt_id_variante { get => txt_id_variante; set => txt_id_variante = value; }
+        }
         [WebMethod]
-        public static bool GetCarrito(ArrayList productos, float total, int cliente)
+        public static string GetCarrito(List<ProductoFiltrado> productos, decimal total, string id)
         {
             try {
-
-                return true;
-            }catch(Exception)
+                using (VAP_ProjectEntities db = new VAP_ProjectEntities())
+                {
+                    db.CreaVentaNueva(DateTime.Now, total, int.Parse(id));   
+                    foreach(ProductoFiltrado p in productos)
+                    {
+                        db.AgrgarProductoVenta(int.Parse(p.Int_carrito), p.Txt_id_variante);
+                    }
+                    return JsonConvert.SerializeObject("Ok", Formatting.Indented);
+                }
+            }catch(Exception e)
             {
-                return false;
+                return JsonConvert.SerializeObject(e, Formatting.Indented);
             }
         }
     }
