@@ -29,8 +29,6 @@ const busqueda = () => {
         )
     } else alert("&#191;Qu&eacute; buscas?", "Asegurate de escribir primero antes de buscar", "warning");
 }
-//Evento blur para el toggle
-$toggle.addEventListener('blur', () => $aside.classList.remove('activo'));  //aside desactivado
 //delegación del evento keydown en el document para la busqueda
 document.addEventListener('keydown', e => {
     if (e.target === $busqueda) {
@@ -174,8 +172,9 @@ document.addEventListener('click', e => {
         $btn_lupa2.classList.toggle('lupa2_focus');
         document.querySelector('header').classList.toggle('header_responsive');
     } else if (e.target === $toggle) $aside.classList.toggle('activo') //aside activo
-    else if (e.target === document.getElementById('a_login')) $modal.show();    //modal principal - login
-    else if (e.target === document.querySelector('.fa-eye')) {
+    else if (e.target === document.getElementById('a_login')) {
+        login(() => alert('FBI', 'We are coming for you...', 'danger'), () => $modal.show())    //modal principal - login
+    } else if (e.target === document.querySelector('.fa-eye')) {
         //ojito activado para ver contraseña
         document.getElementById('passwordL').setAttribute('type', 'text');
         document.querySelector('.formulario__validacion-estado-ojo').classList.remove('fa-eye');
@@ -281,15 +280,17 @@ document.addEventListener('click', e => {
                 data => { if (data) location.replace("../Default.aspx"); },
                 error => {
                     console.error(error);
-                    alert('Error', 'Algo salio mal, intentalo de nuevo m&aacute; tarde','danger');
+                    alert('Error', 'Algo salio mal, intentalo de nuevo m&aacute; tarde', 'danger');
                 }
             )
         }, () => {
             alert("FBI", "We are coming for you...", "danger");
         })
-    }
+    } else if (!Array.from(document.querySelectorAll('.aside_links')).includes(e.target)
+        && e.target !== $toggle && e.target !== $aside
+        && $aside.classList.contains('activo')) $aside.classList.remove('activo');      //aside desactivado
 });
 //evento de cierre del modal
 document.getElementById('modal_main').addEventListener('hidden.bs.modal', limpiarModal);
 //función para comprobar si existe un cliente logueado
-(() => login(() => { }, () => { }))();
+(() => login())();

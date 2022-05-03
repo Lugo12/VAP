@@ -3,7 +3,7 @@
     <%--HEADER FILTROS Y ORDERBY--%>
     <section class="base head head_catalogo oculto">
         <div class="btn-group catalogo_tipo" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-primary">Tipo</button>
+            <button type="button" class="btn btn-primary">Filtro</button>
             <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">

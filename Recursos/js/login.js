@@ -1,6 +1,6 @@
 ﻿import { alert } from './alerta.js';
 import { ajax } from './ajax.js';
-export default (success, reject) => {
+export default (success = () => { }, reject = () => { }) => {
     const on_session = Array.from(document.querySelectorAll('.on-session'));
     const login = document.getElementById('a_login');
     ajax(

@@ -27,10 +27,13 @@ namespace VAP
                     //Cuando hay una busqueda que filtrar
                     if (busqueda != null)
                     {
+                        if (busqueda == "playeras") busqueda = "playera";
+                        else if (busqueda == "sudaderas") busqueda = "sudadera";
                         dbProductos = from d in db.producto
                                       where d.txt_estado_prenda == "vigente"
                                       && d.txt_concepto_prenda.Contains(busqueda)
                                       || d.txt_marca_prenda.Contains(busqueda)
+                                      || d.txt_tipo_prenda.Contains(busqueda)
                                       || d.dec_precio_prenda.ToString().Contains(busqueda)
                                       select d;
                     }

@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web.Services;
 
@@ -20,6 +19,7 @@ namespace VAP
             public string Int_carrito { get => int_carrito; set => int_carrito = value; }
             public string Txt_id_variante { get => txt_id_variante; set => txt_id_variante = value; }
         }
+        //Funciones que solicita el cliente
         [WebMethod]
         public static string GetCarrito(List<ProductoFiltrado> productos, decimal total, string id)
         {
