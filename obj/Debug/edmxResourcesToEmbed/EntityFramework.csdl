@@ -70,6 +70,9 @@
       <End Role="producto" EntitySet="producto" />
       <End Role="variantes_producto" EntitySet="variantes_producto" />
     </AssociationSet>
+    <FunctionImport Name="GetPedidos" ReturnType="Collection(VAP_ProjectModel.GetPedidos_Result)">
+      <Parameter Name="id_cliente" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ComprobarPass_Result">
     <Property Type="Int32" Name="id_cliente" Nullable="false" />
@@ -214,4 +217,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="GetPedidos_Result">
+    <Property Type="Int32" Name="id_pedido" Nullable="false" />
+    <Property Type="DateTime" Name="d_fecha_pedido" Nullable="false" />
+    <Property Type="Decimal" Name="dec_total_pedido" Nullable="false" Precision="8" Scale="2" />
+    <Property Type="String" Name="txt_estado_pedido" Nullable="false" MaxLength="9" />
+    <Property Type="String" Name="txt_tipo_prenda" Nullable="false" MaxLength="8" />
+    <Property Type="String" Name="txt_marca_prenda" Nullable="false" MaxLength="20" />
+    <Property Type="Decimal" Name="dec_precio_prenda" Nullable="false" Precision="6" Scale="2" />
+    <Property Type="String" Name="img_blanco_prenda" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="img_negro_prenda" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="txt_color_prenda" Nullable="false" MaxLength="6" />
+    <Property Type="String" Name="txt_talla_prenda" Nullable="false" MaxLength="2" />
+    <Property Type="Int32" Name="int_cantidad_subpedido" Nullable="false" />
+    <Property Type="Int32" Name="id_cliente" Nullable="false" />
+  </ComplexType>
 </Schema>

@@ -107,5 +107,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetPedidos" FunctionName="VAP_ProjectModel.Store.GetPedidos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VAP_ProjectModel.GetPedidos_Result">
+          <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+          <ScalarProperty Name="d_fecha_pedido" ColumnName="d_fecha_pedido" />
+          <ScalarProperty Name="dec_total_pedido" ColumnName="dec_total_pedido" />
+          <ScalarProperty Name="txt_estado_pedido" ColumnName="txt_estado_pedido" />
+          <ScalarProperty Name="txt_tipo_prenda" ColumnName="txt_tipo_prenda" />
+          <ScalarProperty Name="txt_marca_prenda" ColumnName="txt_marca_prenda" />
+          <ScalarProperty Name="dec_precio_prenda" ColumnName="dec_precio_prenda" />
+          <ScalarProperty Name="img_blanco_prenda" ColumnName="img_blanco_prenda" />
+          <ScalarProperty Name="img_negro_prenda" ColumnName="img_negro_prenda" />
+          <ScalarProperty Name="txt_color_prenda" ColumnName="txt_color_prenda" />
+          <ScalarProperty Name="txt_talla_prenda" ColumnName="txt_talla_prenda" />
+          <ScalarProperty Name="int_cantidad_subpedido" ColumnName="int_cantidad_subpedido" />
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

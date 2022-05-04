@@ -123,6 +123,7 @@
     <Content Include="Recursos\js\catalogo.js" />
     <Content Include="Recursos\js\deepClone.js" />
     <Content Include="Recursos\js\login.js" />
+    <Content Include="Recursos\js\pedidosCliente.js" />
     <Content Include="Recursos\js\perfil.js" />
     <Content Include="Recursos\js\main.js" />
     <Content Include="Recursos\js\tooltip.js" />
@@ -170,6 +171,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityFramework.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="GetPedidos_Result.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
     <Compile Include="MasterPages\MasterPageAdministrador.Master.cs">
       <DependentUpon>MasterPageAdministrador.Master</DependentUpon>

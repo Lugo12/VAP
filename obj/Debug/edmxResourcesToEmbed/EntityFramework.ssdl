@@ -169,6 +169,9 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
     <Parameter Name="celClietne" Type="bigint" Mode="In" />
     <Parameter Name="correoCliente" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="GetPedidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_cliente" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="VAP_ProjectModelStoreContainer">
     <EntitySet Name="administrador" EntityType="Self.administrador" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />

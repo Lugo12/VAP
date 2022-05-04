@@ -2,8 +2,7 @@ import { ajax } from "./ajax.js";       //importando función para las peticiones
 import { alert } from "./alerta.js";        //importando función para las alertas personalizadas
 import login from "./login.js";
 //Evaluamos si hay un usuario logueado
-(() => {
-    login(() => {
+(() => login(() => {
         document.querySelector('.perfil').classList.remove('oculto'); //mostramos el perfil
         const $editar = document.getElementById('editarPerfil');
         const $cancelar = document.getElementById('cancelarPerfil');
@@ -95,5 +94,4 @@ import login from "./login.js";
         });
         //información al cargar la página
         por_default();
-    }, () => location.replace("../Default.aspx"));
-})();
+    }, () => location.replace("../Default.aspx")))();

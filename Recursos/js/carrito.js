@@ -127,6 +127,9 @@ import login from './login.js';
                                 renderCarrito([])   //se vuelve a renderizar el carrito
                                 document.getElementById('no_carrito').textContent = localStorage.length;    //se restablece la cantidad de elementos en el carrito
                                 alert("Ordenado!", "Tu pedido esta pendiente", "info");
+                                window.scrollTo({
+                                    top: 0
+                                });
                             } else {
                                 console.log(data);
                                 alert("Ocurrio un error", "Algo salio mal.. Intentalo de nuevo m&aacute;s tarde", "danger");

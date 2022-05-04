@@ -194,5 +194,14 @@ namespace VAP
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EditarInfCliente", idclienteParameter, nomClienteParameter, apeClienteParameter, celClietneParameter, correoClienteParameter);
         }
+    
+        public virtual ObjectResult<GetPedidos_Result> GetPedidos(Nullable<int> id_cliente)
+        {
+            var id_clienteParameter = id_cliente.HasValue ?
+                new ObjectParameter("id_cliente", id_cliente) :
+                new ObjectParameter("id_cliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPedidos_Result>("GetPedidos", id_clienteParameter);
+        }
     }
 }

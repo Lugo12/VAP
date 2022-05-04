@@ -174,6 +174,9 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
           <Parameter Name="celClietne" Type="bigint" Mode="In" />
           <Parameter Name="correoCliente" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="GetPedidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_cliente" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="VAP_ProjectModelStoreContainer">
           <EntitySet Name="administrador" EntityType="Self.administrador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
@@ -279,6 +282,9 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
             <End Role="producto" EntitySet="producto" />
             <End Role="variantes_producto" EntitySet="variantes_producto" />
           </AssociationSet>
+          <FunctionImport Name="GetPedidos" ReturnType="Collection(VAP_ProjectModel.GetPedidos_Result)">
+            <Parameter Name="id_cliente" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ComprobarPass_Result">
           <Property Type="Int32" Name="id_cliente" Nullable="false" />
@@ -423,6 +429,21 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetPedidos_Result">
+          <Property Type="Int32" Name="id_pedido" Nullable="false" />
+          <Property Type="DateTime" Name="d_fecha_pedido" Nullable="false" />
+          <Property Type="Decimal" Name="dec_total_pedido" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="String" Name="txt_estado_pedido" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="txt_tipo_prenda" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="txt_marca_prenda" Nullable="false" MaxLength="20" />
+          <Property Type="Decimal" Name="dec_precio_prenda" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="String" Name="img_blanco_prenda" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="img_negro_prenda" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="txt_color_prenda" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="txt_talla_prenda" Nullable="false" MaxLength="2" />
+          <Property Type="Int32" Name="int_cantidad_subpedido" Nullable="false" />
+          <Property Type="Int32" Name="id_cliente" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -535,6 +556,25 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetPedidos" FunctionName="VAP_ProjectModel.Store.GetPedidos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VAP_ProjectModel.GetPedidos_Result">
+                <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+                <ScalarProperty Name="d_fecha_pedido" ColumnName="d_fecha_pedido" />
+                <ScalarProperty Name="dec_total_pedido" ColumnName="dec_total_pedido" />
+                <ScalarProperty Name="txt_estado_pedido" ColumnName="txt_estado_pedido" />
+                <ScalarProperty Name="txt_tipo_prenda" ColumnName="txt_tipo_prenda" />
+                <ScalarProperty Name="txt_marca_prenda" ColumnName="txt_marca_prenda" />
+                <ScalarProperty Name="dec_precio_prenda" ColumnName="dec_precio_prenda" />
+                <ScalarProperty Name="img_blanco_prenda" ColumnName="img_blanco_prenda" />
+                <ScalarProperty Name="img_negro_prenda" ColumnName="img_negro_prenda" />
+                <ScalarProperty Name="txt_color_prenda" ColumnName="txt_color_prenda" />
+                <ScalarProperty Name="txt_talla_prenda" ColumnName="txt_talla_prenda" />
+                <ScalarProperty Name="int_cantidad_subpedido" ColumnName="int_cantidad_subpedido" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
