@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VAP_ProjectModelStoreContainer" CdmEntityContainer="VAP_ProjectEntities">
+    <FunctionImportMapping FunctionImportName="AgrgarProductoVenta" FunctionName="VAP_ProjectModel.Store.AgrgarProductoVenta" />
+    <FunctionImportMapping FunctionImportName="CancelarPedido" FunctionName="VAP_ProjectModel.Store.CancelarPedido" />
+    <FunctionImportMapping FunctionImportName="ComprobarPass" FunctionName="VAP_ProjectModel.Store.ComprobarPass">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VAP_ProjectModel.ComprobarPass_Result">
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+          <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
+          <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
+          <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
+          <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
+          <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
+          <ScalarProperty Name="Pass" ColumnName="Pass" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CrearCliente" FunctionName="VAP_ProjectModel.Store.CrearCliente">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VAP_ProjectModel.CrearCliente_Result">
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+          <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
+          <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
+          <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
+          <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
+          <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CrearProducto" FunctionName="VAP_ProjectModel.Store.CrearProducto" />
+    <FunctionImportMapping FunctionImportName="CrearVariante" FunctionName="VAP_ProjectModel.Store.CrearVariante" />
+    <FunctionImportMapping FunctionImportName="CreaVentaNueva" FunctionName="VAP_ProjectModel.Store.CreaVentaNueva" />
+    <FunctionImportMapping FunctionImportName="EditarInfCliente" FunctionName="VAP_ProjectModel.Store.EditarInfCliente" />
+    <EntitySetMapping Name="administrador">
+      <EntityTypeMapping TypeName="VAP_ProjectModel.administrador">
+        <MappingFragment StoreEntitySet="administrador">
+          <ScalarProperty Name="txt_contraseña_admin" ColumnName="txt_contraseña_admin" />
+          <ScalarProperty Name="txt_correo_admin" ColumnName="txt_correo_admin" />
+          <ScalarProperty Name="id_administrador" ColumnName="id_administrador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cliente">
+      <EntityTypeMapping TypeName="VAP_ProjectModel.cliente">
+        <MappingFragment StoreEntitySet="cliente">
+          <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
+          <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
+          <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
+          <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
+          <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pedido">
+      <EntityTypeMapping TypeName="VAP_ProjectModel.pedido">
+        <MappingFragment StoreEntitySet="pedido">
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+          <ScalarProperty Name="txt_estado_pedido" ColumnName="txt_estado_pedido" />
+          <ScalarProperty Name="dec_total_pedido" ColumnName="dec_total_pedido" />
+          <ScalarProperty Name="d_fecha_pedido" ColumnName="d_fecha_pedido" />
+          <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="producto">
+      <EntityTypeMapping TypeName="VAP_ProjectModel.producto">
+        <MappingFragment StoreEntitySet="producto">
+          <ScalarProperty Name="txt_estado_prenda" ColumnName="txt_estado_prenda" />
+          <ScalarProperty Name="img_negro_prenda" ColumnName="img_negro_prenda" />
+          <ScalarProperty Name="img_blanco_prenda" ColumnName="img_blanco_prenda" />
+          <ScalarProperty Name="dec_precio_prenda" ColumnName="dec_precio_prenda" />
+          <ScalarProperty Name="txt_marca_prenda" ColumnName="txt_marca_prenda" />
+          <ScalarProperty Name="txt_concepto_prenda" ColumnName="txt_concepto_prenda" />
+          <ScalarProperty Name="txt_tipo_prenda" ColumnName="txt_tipo_prenda" />
+          <ScalarProperty Name="id_prenda" ColumnName="id_prenda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="variantes_producto">
+      <EntityTypeMapping TypeName="VAP_ProjectModel.variantes_producto">
+        <MappingFragment StoreEntitySet="variantes_producto">
+          <ScalarProperty Name="id_prenda" ColumnName="id_prenda" />
+          <ScalarProperty Name="int_cantidad_prenda" ColumnName="int_cantidad_prenda" />
+          <ScalarProperty Name="txt_talla_prenda" ColumnName="txt_talla_prenda" />
+          <ScalarProperty Name="txt_color_prenda" ColumnName="txt_color_prenda" />
+          <ScalarProperty Name="txt_id_variante" ColumnName="txt_id_variante" />
+          <ScalarProperty Name="id_variante" ColumnName="id_variante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="venta">
+      <EntityTypeMapping TypeName="VAP_ProjectModel.venta">
+        <MappingFragment StoreEntitySet="venta">
+          <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+          <ScalarProperty Name="id_venta" ColumnName="id_venta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="producto_seleccionado">
+      <EntityTypeMapping TypeName="VAP_ProjectModel.producto_seleccionado">
+        <MappingFragment StoreEntitySet="producto_seleccionado">
+          <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+          <ScalarProperty Name="txt_id_variante" ColumnName="txt_id_variante" />
+          <ScalarProperty Name="int_cantidad_subpedido" ColumnName="int_cantidad_subpedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetPedidos" FunctionName="VAP_ProjectModel.Store.GetPedidos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VAP_ProjectModel.GetPedidos_Result">
+          <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+          <ScalarProperty Name="d_fecha_pedido" ColumnName="d_fecha_pedido" />
+          <ScalarProperty Name="dec_total_pedido" ColumnName="dec_total_pedido" />
+          <ScalarProperty Name="txt_estado_pedido" ColumnName="txt_estado_pedido" />
+          <ScalarProperty Name="txt_tipo_prenda" ColumnName="txt_tipo_prenda" />
+          <ScalarProperty Name="txt_marca_prenda" ColumnName="txt_marca_prenda" />
+          <ScalarProperty Name="dec_precio_prenda" ColumnName="dec_precio_prenda" />
+          <ScalarProperty Name="img_blanco_prenda" ColumnName="img_blanco_prenda" />
+          <ScalarProperty Name="img_negro_prenda" ColumnName="img_negro_prenda" />
+          <ScalarProperty Name="txt_color_prenda" ColumnName="txt_color_prenda" />
+          <ScalarProperty Name="txt_talla_prenda" ColumnName="txt_talla_prenda" />
+          <ScalarProperty Name="int_cantidad_subpedido" ColumnName="int_cantidad_subpedido" />
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
