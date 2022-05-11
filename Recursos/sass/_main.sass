@@ -1,0 +1,250 @@
+@import "variables"
+
+.main
+  box-sizing: border-box
+  padding-top: 3.75rem
+  padding-bottom: 20px
+  min-height: 100vh
+  height: auto 
+  .contenido
+    width: 80%
+    margin: 0 auto
+    height: 100%
+    .base
+      margin: 20px 0
+      width: 100%
+      display: flex
+    .head
+      justify-content: space-between
+    .mensaje
+      h2
+        font-size: 1.875rem
+        padding-top: 20px
+    .body_catalogo
+      display: grid
+      grid-gap: 20px
+      grid-template-columns: repeat(auto-fill, minmax(#{"min(100%, 200px)"},1fr))      
+      .producto_catalogo 
+        border-radius: 5px 
+        padding-bottom: 5px
+        transition: transform .2s ease 
+        .image_producto          
+          img
+            cursor: pointer
+            width: 100%  
+        .header_producto
+          text-transform: capitalize
+          font-size: 1rem
+        .title_producto
+          margin-bottom: 0
+          text-align: center          
+        .detalles_producto
+          color: #605050
+          background: $color_menta
+          min-width: 50%
+          margin: 0 auto
+          margin-bottom: 5px
+          &:hover
+            color: #fff
+            background: #96CFBE   
+    .body_carrito     
+      display: flex
+      flex-direction: column
+      .producto_carrito
+        width: 100%
+        background: #6f6f6f
+        margin-bottom: 10px
+        .header_carrito
+          margin-bottom: 0
+          color: #fff
+        .body_carrito
+          display: grid
+          grid-template-columns: repeat(auto-fit,minmax(#{"min(100%,175px)"},1fr))
+          .image_carrito
+            width: 25%;
+            display: flex;
+            align-self: center;
+            justify-self: center;
+            img
+              width: 100%
+          .acciones_carrito
+            display: flex
+            flex-direction: column
+            align-content: center
+            justify-content: center
+            .del
+              background: $color_danger
+              &:hover
+                background: #FF0000 
+            .del_All
+              background: #FF8000
+              &:hover
+                background: #FF6000
+            button
+              color: #fff
+              border: none
+              width: 3.125rem
+              margin: 5px auto;
+              i
+                pointer-events: none
+          h5,h6,p
+            color: #fff
+            margin-bottom: 0
+            display: flex
+            justify-self: center
+            align-self: center 
+          h6
+            text-transform: capitalize
+      .total_carrito
+        display: flex
+        justify-content: end
+        margin: 30px 0
+      .btn_pedido
+        color: #fff
+        background: #B4ADEA 
+        width: #{"max(30%, 200px)"}
+        margin: 0 auto
+        &:hover
+          background: #a096ec
+    .cuerpo_modal
+      display: grid
+      grid-template-columns: 1fr 1fr
+      .imagen_modal 
+        img
+          width: 100%
+      .contenido_modal
+        font-size: 1rem
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center 
+        .color_modal
+          width: 80%
+        .talla_modal
+          width: 100% 
+        .talla_modal,
+        .color_modal 
+          display: flex 
+          justify-content: space-evenly
+          margin-bottom: 16px
+          .radio_modal
+            display: flex
+            justify-content: center
+            width: 20%
+            .CH,.M,.G,.EG
+              background: #fff
+              color: #000
+              padding: 7px
+              width: 100%
+              transition: background .25s ease 
+              &:hover
+                background: #000
+                color: #fff
+            .color
+              padding: 25px 
+              width: 100%
+              border-radius: 50% 
+              transition: background .25s ease
+              &:hover
+                box-shadow: 0 0 0 5px #B388EB
+            .negro
+              background: #000   
+            .blanco
+              background: #fff
+        .p
+          margin-bottom: 8px
+    .perfil
+      width: 80%
+      margin: 20px auto
+      display: flex
+      background: $boton_primario
+      padding: 20px
+      color: #fff
+      flex-direction: column
+      border-radius: 5px
+      h3
+        color: #fff
+        display: inline-block
+        width: 100%
+        padding-bottom: 5px
+        border-bottom: 3px solid #fff
+      .datos
+        overflow: hidden
+        display: grid
+        grid-template-columns: repeat(auto-fill,1fr) 
+        width: 100%
+        padding-top: 20px
+        padding-bottom: 10px
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5)
+        .perfil_texto
+          font-size: 1.25rem
+        .input_perfil
+          border-radius: 25px
+      .footer_perfil
+        padding-top: 20px
+        display: flex
+        justify-content: end 
+        .btn_perfil
+          margin-left: 1.25rem
+    .alerta
+      position: fixed;
+      z-index: 9999;
+      bottom: 20px;
+      right: 20px;
+      max-width: 30%;
+      min-width: 300px;
+      .mensaje
+        width: 100% 
+        margin-bottom: 0;
+    .body_pedido_cliente
+      display: grid
+      grid-template-columns: repeat(auto-fill,minmax(#{"min(100%,23.75rem)"},1fr))
+      grid-gap: 20px
+      .pedido_pedidos
+        box-shadow: 5px 5px 10px #141414;
+        border-radius: 20px
+        transition: transform .5s ease
+        &:hover
+          transform: scale(1.03)
+        .body_pedido
+          display: grid
+          grid-template-columns: 1fr .75fr
+          .detalles_pedido,
+          .acciones_pedido
+            display: flex
+            flex-direction: column
+            justify-content: center
+          .acciones_pedido
+            button
+              width: 7.1875rem
+              margin: 10px auto
+            .detalles_pedido_btn
+              background: #F9E9EC
+              color: #141414
+              &:hover
+                background: #dfd5d6
+            .cancelar_pedido_btn
+              background: $color_danger
+              color: #fff
+              &:hover
+                background: #BD1E1E
+    .modal_pedidos
+      .body_modal_pedidos
+        .producto_pedido
+          display: grid
+          grid-template-columns: repeat(3,1fr)
+          border-top: 1px solid #c6daff          
+          border-bottom: 1px solid #c6daff          
+          .imagen_pp
+            width: 50%
+            margin: 0 auto
+            img
+              width: 100%
+          .detalles_pp,
+          .caracteristicas_pp
+            display: flex
+            flex-direction: column
+            justify-content: center
+            p
+              margin-bottom: 8px
+

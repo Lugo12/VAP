@@ -1,0 +1,29 @@
+$color_primario: #141414  
+$boton_primario: #363636 
+$boton_sombra: rgba(192, 187, 187,.8) 
+$fondo_principal: #efefef
+$color_danger: #df4759
+$color_menta: #B9F9E5
+$color_incorrecto: #bb2929
+$color_correcto: #1ed12d
+//VALIDACIONES MODAL
+.contenedor-maestro
+  .modal_main
+    .modal-content
+      .body_main_modal  
+        .login_modal,
+        .registro_modal
+          .formulario__grupo-correcto 
+            .formulario__validacion-estado
+              color: $color_correcto
+              opacity: 1
+          .formulario__grupo-incorrecto 
+            .formulario__label,
+            .formulario__validacion-estado
+              color: $color_incorrecto
+            .formulario__validacion-estado
+              opacity: 1
+            .formulario__input
+              border: 3px solid $color_incorrecto
+
+

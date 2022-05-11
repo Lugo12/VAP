@@ -1,0 +1,40 @@
+@import "variables"
+.aside
+  position: fixed
+  height: 75%
+  width: 150px
+  left: -150px
+  top: 3.75rem
+  background: $color_primario
+  display: flex
+  flex-direction: column
+  transition: all .5s ease
+  z-index: 9
+  .aside_links
+    font-size: 1.125rem
+    margin: 0 10px 
+    margin-bottom: 20px
+    text-decoration: none
+    color: #fff
+    padding: 5px 3px
+    border-bottom: 2px solid #fff
+    transition: all .5s ease
+    &:hover
+      background: $boton_sombra
+      border-bottom: 2px solid $color_primario
+      border-radius: 2px
+  .sign-off
+    font-size: 1rem
+    padding-bottom: 0
+    border: none
+    position: absolute
+    left: 0
+    bottom: 0
+    span,i
+      pointer-events: none
+    &:hover
+      background: none 
+      border: none
+      color: $color_danger
+.activo
+  left: 0

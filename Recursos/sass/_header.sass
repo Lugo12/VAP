@@ -1,0 +1,96 @@
+@import "variables"
+
+header
+  width: 100%
+  height: 3.75rem
+  background: $color_primario
+  display: flex
+  align-items: center
+  position: fixed
+  z-index: 10
+  .botones_izq
+    width: 10%
+    min-width: 8.125rem
+    overflow: hidden
+    font-size: 1.25rem
+    display: flex
+    .toggler
+      border: none
+      background: $color_primario
+      color: #fff
+      padding: .75em 1.25em
+      cursor: pointer
+      transition: all .5s ease
+      &:hover
+        color: $boton_sombra
+      i
+        pointer-events: none
+    .logo
+      display: flex
+      align-items: center
+      min-width: 2.5em
+      width: 2.5em
+      img        
+        width: 100%
+        transition: transform 1s ease
+        &:hover
+          transform: rotateY(360deg)
+  .busqueda
+    position: relative
+    width: 70%
+    display: flex
+    input[type="text"]
+      width: 100%
+      padding: 0
+      border: none
+      height: 1.375rem
+      &:focus
+        outline: none
+    .lupa
+      padding: 0
+      position: absolute
+      right: 0.1875rem
+      z-index: 100
+      color: #000
+      background: none
+      border: none
+      cursor: pointer
+      height: 1rem
+      align-self: center
+      display: flex
+      align-items: center
+      &:hover
+        color: #c2c2c2
+      i
+        pointer-events: none
+  .busqueda_responsive
+    display: none
+    width: 20%
+    justify-content: end
+    .lupa2
+      color: #fff
+      font-size: 1.25rem
+      align-self: center
+      background: none
+      border: none
+      cursor: pointer
+      transition: all .5s ease
+      &:hover
+        color: $boton_sombra
+      i
+        pointer-events: none
+  .botones_der
+    width: 20%
+    font-size: 1.25rem
+    display: flex
+    justify-content: space-evenly
+    align-items: center
+    .btn_der
+      text-decoration: none
+      color: #fff
+      transition: color .5s ease 
+      &:hover
+        color: $boton_sombra
+      i
+        pointer-events: none
+  

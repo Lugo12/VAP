@@ -1,0 +1,29 @@
+@media screen and (max-width:500px) 
+  html
+    font-size: 14px !important
+  header
+    .botones_izq
+      width: 30% 
+    .botones_der
+      width: 50% 
+    .busqueda
+      display: none
+    .busqueda_responsive
+      display: flex
+  .main
+    .contenido
+      .datos
+        grid-template-columns: 1fr  
+@media screen and (max-width:900px) 
+  .contenedor-maestro
+    .modal_main
+      .modal-content
+        .body_main_modal
+          grid-template-columns: 1fr
+          grid-gap: 20px
+          .login_modal
+            border-right: none
+            border-bottom: 1px solid #000
+            padding-bottom: 20px
+          .registro_modal_inputs
+            grid-template-columns: 1fr
