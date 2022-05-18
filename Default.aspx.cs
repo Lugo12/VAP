@@ -10,7 +10,7 @@ namespace VAP
     public partial class Default : System.Web.UI.Page
     {
         static string json = null, busqueda = null;
-        public static string cliente = null;  
+        //public static string cliente = null;  
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -57,14 +57,14 @@ namespace VAP
                 using(VAP_ProjectEntities db = new VAP_ProjectEntities())
                 {
                     var estado = "";
-                    if (db.ComprobarPass(correo).ToList().Count > 0) estado = "correo_existente";
+                    if (db.ComprobarPass(correo).ToList().Count > 0) estado = JsonConvert.SerializeObject("correo_existente", Formatting.Indented);
                     else {
                         db.CrearCliente(nombre, apellidos, long.Parse(telefono), correo, password);
                         db.SaveChanges();
-                        cliente = JsonConvert.SerializeObject(db.ComprobarPass(correo).ToList(), Formatting.Indented);
-                        estado = "logueado";
+                        //cliente = JsonConvert.SerializeObject(db.ComprobarPass(correo).ToList(), Formatting.Indented);
+                        estado = JsonConvert.SerializeObject(db.ComprobarPass(correo).ToList(), Formatting.Indented);
                     }
-                    return JsonConvert.SerializeObject(estado, Formatting.Indented);
+                    return estado;
                 }
             }catch(Exception e)
             {
@@ -84,13 +84,13 @@ namespace VAP
                     {
                         if (respuesta.Contains(respuesta.Find(d => d.Pass == password)))
                         {
-                            cliente = JsonConvert.SerializeObject(respuesta, Formatting.Indented);
-                            estado = "logueado";
+                            //cliente = JsonConvert.SerializeObject(respuesta, Formatting.Indented);
+                            estado = JsonConvert.SerializeObject(db.ComprobarPass(correo).ToList(), Formatting.Indented);
                         }
-                        else estado = "password_error";
+                        else estado = JsonConvert.SerializeObject("password_error", Formatting.Indented);
                     }
-                    else estado = "correo_error";
-                    return JsonConvert.SerializeObject(estado,Formatting.Indented);
+                    else estado = JsonConvert.SerializeObject("correo_error", Formatting.Indented);
+                    return estado;
                 }
             }
             catch (Exception e)
@@ -129,15 +129,23 @@ namespace VAP
             return Logueo(correo, password);
         }       //Recibe la información del cliente para su logueo
         [WebMethod]
-        public static string ExistCliente()
+        public static string ExistCliente(string correo)
         {
-            return cliente;
+            try
+            {
+                using (VAP_ProjectEntities db = new VAP_ProjectEntities())
+                {
+                    var respuesta = db.ComprobarPass(correo).ToList();
+                    if (respuesta.Count > 0)
+                    {
+                        return JsonConvert.SerializeObject(db.ComprobarPass(correo).ToList(), Formatting.Indented);
+                    } else return JsonConvert.SerializeObject("No", Formatting.Indented);
+                }
+            }
+            catch (Exception e)
+            {
+                return JsonConvert.SerializeObject(e, Formatting.Indented);
+            }
         }   //Comprobamos si existe un cliente logueado
-        [WebMethod]
-        public static bool CerrarSesion()
-        {
-            cliente = null;
-            return true;
-        }   //Cerramos Sesion
     }
 }

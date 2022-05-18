@@ -23,9 +23,8 @@ namespace VAP
                     {
                         if (db.ComprobarPass(correo).ToList().Count > 0) return JsonConvert.SerializeObject("correo_existente",Formatting.Indented);
                     }
-                    db.EditarInfCliente(int.Parse(id), nombre, apellidos, long.Parse(celular), correo);
-                    Default.cliente = JsonConvert.SerializeObject(db.ComprobarPass(correo).ToList(), Formatting.Indented);
-                    return JsonConvert.SerializeObject("Ok", Formatting.Indented);
+                    db.EditarInfCliente(int.Parse(id), nombre, apellidos, long.Parse(celular), correo);                    
+                    return JsonConvert.SerializeObject(db.ComprobarPass(correo).ToList(), Formatting.Indented); 
                 }
             }
             catch(Exception e)
