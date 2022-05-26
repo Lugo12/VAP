@@ -1,0 +1,204 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPageCliente.master.cs" Inherits="VAP.MasterPages.MasterPageCliente" %>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VAP</title>
+  <link rel="shortcut icon" href="../Recursos/icon/VAP_Logo.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Hubballi&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Recursos/css/normalize.css">
+  <link rel="stylesheet" href="../Recursos/css/estilos.css"/>
+  <link rel="stylesheet" href="../Recursos/css/bootstrap.min.css" /> 
+  <script src="https://kit.fontawesome.com/e650e71a85.js"></script>
+</head>
+
+<body>
+    <%--CONTENEDOR MAESTRO--%>
+  <div class="contenedor-maestro">
+      <%--HEADER--%>
+    <header>
+      <div class="botones_izq">
+        <button class="toggler" type="button">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="../Default.aspx" class="logo"><img src="../Imagenes/VAP_Logo.png" alt="Logo"></a>
+      </div>
+      <div class="busqueda">
+        <input type="text" id="input_busqueda" placeholder=" ¿Qué estas buscando?">
+        <button class="lupa" type="button">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      <div class="busqueda_responsive">
+        <button class="btn_der lupa2" type="button">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      <div class="botones_der">
+        <a href="../Carrito.aspx" class="btn_der"><span id="no_carrito"></span><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="../Perfil.aspx" class="btn_der on-session oculto"><i class="fa-solid fa-circle-user"></i></a>
+        <a href="#" id="a_login" class="btn_der sign-in"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+      </div>
+    </header>
+      <%--ASIDE--%>
+    <aside class="aside">
+      <a href="../Default.aspx" class="aside_links">
+        <i class="fa-solid fa-shirt"></i>
+        <span>Catálogo</span>
+      </a>
+      <a href="../Carrito.aspx" class="aside_links">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Carrito</span>
+      </a>
+      <a href="../Perfil.aspx" class="aside_links on-session oculto">
+        <i class="fa-solid fa-user"></i>
+        <span>Perfil</span>
+      </a>
+      <a href="../PedidosCliente.aspx" class="aside_links on-session oculto">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <span>Pedidos</span>
+      </a>
+      <a href="#" class="aside_links on-session sign-off oculto">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Cerrar Sesión</span>
+      </a>
+    </aside>
+      <%--MAIN--%>
+    <main class="main">
+        <form id="form1" runat="server">
+          <div class="contenido">
+              <div class="mensaje oculto"><h2></h2></div>
+              <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+              </asp:ContentPlaceHolder>
+              <div class="alerta oculto" id="alerta"></div>
+          </div>
+        </form>
+    </main>
+      <%--FOOTER--%>
+    <footer>
+        <h5>¿Encajar en la sociedad ó ser feliz? No busques más, en VAP tenemos lo que te gusta</h5>
+        <h6>Todos los dereches reservados &reg;VAP</h6>
+    </footer>
+      <%--BOTON PARA HACER SCROLL--%>
+      <button class="scroll-top-btn invisible"><i class="fa-solid fa-circle-chevron-up"></i></button>
+      <%--MODAL PRINCIPAL--%>
+      <div class="modal_main modal fade" id="modal_main" tabindex="-1" aria-labelledby="titulo_modal_main" aria-hidden="true">
+          <div class="modal-dialog modal-fullscreen" role="document">
+              <div class="modal-content">
+                  <%--HEADER MODAL--%>
+                  <div class="header_main_modal modal-header">
+                      <h2 class="title_main_modal modal-title" id="titulo_modal_main">VAP</h2>
+                      <button type="button" class="close_main_modal btn-close" data-bs-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true"></span>
+                      </button>
+                  </div>
+                  <%--BODY MODAL--%>
+                  <div class="body_main_modal modal-body">
+                      <%--LOGIN--%>
+                      <div class="login_modal">
+                          <h3>Login</h3>
+                          <!-- Grupo: Correo -->
+                          <div class="formulario__grupo" id="grupo__correoL">
+                              <label for="correoL" class="formulario__label">Correo</label>
+                              <div class="formulario__grupo-input">
+                                  <input type="email" class="formulario__input" name="correoL" id="correoL">  
+                              </div>    
+                          </div>
+                          <!-- Grupo: Contraseña -->
+                          <div class="formulario__grupo" id="grupo__passwordL">
+                              <label for="passwordL" class="formulario__label">Contraseña</label>
+                              <div class="formulario__grupo-input">
+                                  <input type="password" class="formulario__input" name="passwordL" id="passwordL">
+                                  <i class="fa-solid fa-eye formulario__validacion-estado-ojo"></i>
+                              </div>
+                          </div>
+                          <button type="button" class="btn boton btn_login">Iniciar Sesión</button>
+                      </div>
+                      <%--REGISTRO--%>
+                      <div class="registro_modal">
+                          <h3>Registro</h3>
+                          <div class="registro_modal_inputs">
+                              <!-- Grupo: Nombre -->
+                              <div class="formulario__grupo" id="grupo__nombre">
+                                  <label for="nombre" class="formulario__label">Nombre</label>
+                                  <div class="formulario__grupo-input">
+                                      <input type="text" class="registro formulario__input" name="nombre" id="nombre" placeholder="Citlali">
+                                      <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
+                                  </div>
+                                  <p class="formulario__input-error">
+                                      El nombre solo puede contener letras y espacios.
+                                  </p>
+                              </div>
+                              <!-- Grupo: Apellidos -->
+                              <div class="formulario__grupo" id="grupo__apellidos">
+                                  <label for="apellidos" class="formulario__label">Apellidos</label>
+                                  <div class="formulario__grupo-input">
+                                      <input type="text" class="registro formulario__input" name="apellidos" id="apellidos" placeholder="Salinas">
+                                      <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
+                                  </div>
+                                  <p class="formulario__input-error">
+                                      Los apellidos solo pueden contener letras y espacios.
+                                  </p>
+                              </div>
+                              <!-- Grupo: Telefono -->
+                              <div class="formulario__grupo" id="grupo__telefono">
+                                  <label for="telefono" class="formulario__label">Celular</label>
+                                  <div class="formulario__grupo-input">
+                                      <input type="text" class="registro formulario__input" name="telefono" id="telefono" placeholder="5544444444">
+                                      <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
+                                  </div>
+                                  <p class="formulario__input-error">
+                                      El teléfono solo puede contener números y el máximo son 14 dígitos.
+                                  </p>
+                              </div>
+                              <!-- Grupo: Correo -->
+                              <div class="formulario__grupo" id="grupo__correo">
+                                  <label for="correo" class="formulario__label">Correo</label>
+                                  <div class="formulario__grupo-input">
+                                      <input type="email" class="registro formulario__input" name="correo" id="correo" placeholder="correo@correo.com">
+                                      <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
+                                  </div>
+                                  <p class="formulario__input-error">
+                                      El correo solo puede contener letras, números, puntos, guines y guion bajo.
+                                  </p>
+                              </div>
+                              <!-- Grupo: Contraseña -->
+                              <div class="formulario__grupo" id="grupo__password">
+                                  <label for="password" class="formulario__label">Contraseña</label>
+                                  <div class="formulario__grupo-input">
+                                      <input type="password" class="registro formulario__input" name="password" id="password">
+                                      <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
+                                  </div>
+                                  <p class="formulario__input-error">
+                                      La contraseña tiene que ser de 4 a 12 dígitos.
+                                  </p>
+                              </div>
+                              <!-- Grupo: Contraseña 2 -->
+                              <div class="formulario__grupo" id="grupo__password2">
+                                  <label for="password2" class="formulario__label">Confirmar Contraseña</label>
+                                  <div class="formulario__grupo-input">
+                                      <input type="password" class="registro formulario__input" name="password2" id="password2">
+                                      <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
+                                  </div>
+                                  <p class="formulario__input-error">
+                                      Ambas contraseñas deben ser iguales.
+                                  </p>
+                              </div>
+                          </div>
+                          <button type="button" class="btn boton btn_registro">Registrarse</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  <script src="../Recursos/js/main.js" type="module"></script>
+</body>
+
+</html>

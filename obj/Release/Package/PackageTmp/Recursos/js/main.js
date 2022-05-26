@@ -221,8 +221,17 @@ document.addEventListener('click', e => {
                 'Default.aspx/SetCliente',
                 JSON.stringify(data),
                 data => {
-                    if (data === "logueado") location.reload();
-                    else if (data === "correo_existente") alert("Usuario registrado", "El correo ya ha sido registrdo", "primary");
+                    if (data[0].id_cliente) {
+                        const cliente = {
+                            id_cliente: data[0].id_cliente,
+                            txt_nombre_cliente: data[0].txt_nombre_cliente,
+                            txt_apellidos_cliente: data[0].txt_apellidos_cliente,
+                            int_celular_cliente: data[0].int_celular_cliente,
+                            txt_correo_cliente: data[0].txt_correo_cliente
+                        }
+                        sessionStorage.setItem('cliente', JSON.stringify(cliente));
+                        location.reload();
+                    } else if (data === "correo_existente") alert("Usuario registrado", "El correo ya ha sido registrdo", "primary");
                     else {
                         limpiarModal();
                         console.log(data);
@@ -255,8 +264,17 @@ document.addEventListener('click', e => {
                 'Default.aspx/GetCliente',
                 JSON.stringify(data),
                 data => {
-                    if (data === "logueado") location.reload();
-                    else if (data === "password_error") alert("Contrase&ntilde;a Incorrecta", "Ingresa la contrase&ntilde;a correcta", "primary");
+                    if (data[0].id_cliente) {
+                        const cliente = {
+                            id_cliente: data[0].id_cliente,
+                            txt_nombre_cliente: data[0].txt_nombre_cliente,
+                            txt_apellidos_cliente: data[0].txt_apellidos_cliente,
+                            int_celular_cliente: data[0].int_celular_cliente,
+                            txt_correo_cliente: data[0].txt_correo_cliente
+                        }
+                        sessionStorage.setItem('cliente', JSON.stringify(cliente));
+                        location.reload();
+                    } else if (data === "password_error") alert("Contrase&ntilde;a Incorrecta", "Ingresa la contrase&ntilde;a correcta", "primary");
                     else if (data === "correo_error") alert("Usuario sin registrar", "El correo no ha sido registrdo", "primary");
                     else {
                         limpiarModal();
@@ -272,20 +290,8 @@ document.addEventListener('click', e => {
         } else alert("Campos necesarios", "Porfavor llena todos los campos", "danger");
     } else if (e.target === document.querySelector('.sign-off')) {
         //Click en el botón para cerrar sesión
-        login(() => {
-            ajax(
-                'POST',
-                'Default.aspx/CerrarSesion',
-                null,
-                data => { if (data) location.replace("../Default.aspx"); },
-                error => {
-                    console.error(error);
-                    alert('Error', 'Algo salio mal, intentalo de nuevo m&aacute; tarde', 'danger');
-                }
-            )
-        }, () => {
-            alert("FBI", "We are coming for you...", "danger");
-        })
+        sessionStorage.clear();
+        location.replace("../Default.aspx");
     } else if (!Array.from(document.querySelectorAll('.aside_links')).includes(e.target)
         && e.target !== $toggle && e.target !== $aside
         && $aside.classList.contains('activo')) $aside.classList.remove('activo');      //aside desactivado

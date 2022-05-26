@@ -78,7 +78,15 @@ import login from "./login.js";
                         'Perfil.aspx/EditCliente',
                         JSON.stringify(data),
                         data => {
-                            if (data === 'Ok') {
+                            if (data[0].id_cliente) {
+                                const cliente = {
+                                    id_cliente: data[0].id_cliente,
+                                    txt_nombre_cliente: data[0].txt_nombre_cliente,
+                                    txt_apellidos_cliente: data[0].txt_apellidos_cliente,
+                                    int_celular_cliente: data[0].int_celular_cliente,
+                                    txt_correo_cliente: data[0].txt_correo_cliente
+                                }
+                                sessionStorage.setItem('cliente', JSON.stringify(cliente));
                                 login(() => por_default());
                                 alert('Informaci&oacute;n Guardada', 'El usuario se edito con &eacute;xito', 'success');
                             } else if (data === 'correo_existente') alert("Correo existente", "Ingresa un correo diferente", "primary");
