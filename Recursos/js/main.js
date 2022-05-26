@@ -248,7 +248,7 @@ document.addEventListener('click', e => {
                 if (input.classList.contains('registro') && input.value == "")
                     input.parentNode.parentNode.classList.add('formulario__grupo-incorrecto');
             })
-            alert("Campos necesarios", "Porfavor llena todos los campos", "danger");
+            alert("Campos necesarios", "Porfavor llena todos los campos de forma correcto", "danger");
         }
     } else if (e.target === document.querySelector('.btn_login')) {
         //cuando se da click en el botón login
