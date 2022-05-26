@@ -81,7 +81,7 @@ const validarCampo = (expresion, input, campo) => {
         document
             .querySelector(`#grupo__${campo} .formulario__input-error`)
             .classList.add('formulario__input-error-activo');
-        campos[campo] = true;
+        campos[campo] = false;
     }
 };
 //Función para validar las contraseñas
