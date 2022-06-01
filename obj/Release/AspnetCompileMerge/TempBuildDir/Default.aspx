@@ -76,7 +76,7 @@
                 <div class="modal-footer">
                     <button type="button" id="agregar_carrito" class="boton btn btn-primary disabled" data-bs-dismiss="modal">Agregar al Carrito</button>
                     <button type="button" class="boton cerrar_modal btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                </div>
+                    </div>
             </div>
         </div>
     </div>

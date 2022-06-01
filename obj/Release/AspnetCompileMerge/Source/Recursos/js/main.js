@@ -50,7 +50,7 @@ const inputs = Array.from(document.querySelectorAll('.formulario__input'));
 const expresiones = {
     nombre: /^[a-zA-Z\u00C0-\u017F\s]{3,20}$/, // Letras y espacios, pueden llevar acentos.
     apellidos: /^[a-zA-Z\u00C0-\u017F\s]{3,30}$/, // Letras y espacios, pueden llevar acentos.
-    password: /^.{4,20}$/, // 4 a 12 digitos-.
+    password: /^.{4,12}$/, // 4 a 12 digitos-.
     correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     telefono: /^\d{8,10}$/ // 8 a 10 numeros.
 };
@@ -59,6 +59,7 @@ const campos = {
     nombre: false,
     apellidos: false,
     password: false,
+    password2: false,
     correo: false,
     telefono: false
 };
@@ -81,7 +82,7 @@ const validarCampo = (expresion, input, campo) => {
         document
             .querySelector(`#grupo__${campo} .formulario__input-error`)
             .classList.add('formulario__input-error-activo');
-        campos[campo] = true;
+        campos[campo] = false;
     }
 };
 //Función para validar las contraseñas
@@ -96,7 +97,7 @@ const validarPassword2 = () => {
         document
             .querySelector(`#grupo__password2 .formulario__input-error`)
             .classList.add('formulario__input-error-activo');
-        campos['password'] = false;
+        campos['password2'] = false;
     } else {
         document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-incorrecto');
         document.getElementById(`grupo__password2`).classList.add('formulario__grupo-correcto');
@@ -105,7 +106,7 @@ const validarPassword2 = () => {
         document
             .querySelector(`#grupo__password2 .formulario__input-error`)
             .classList.remove('formulario__input-error-activo');
-        campos['password'] = true;
+        campos['password2'] = true;
     }
 };
 //Función para validar formulario
@@ -190,6 +191,7 @@ document.addEventListener('click', e => {
             campos.nombre &&
             campos.apellidos &&
             campos.password &&
+            campos.password2 &&
             campos.correo &&
             campos.telefono
         ) {
@@ -248,7 +250,7 @@ document.addEventListener('click', e => {
                 if (input.classList.contains('registro') && input.value == "")
                     input.parentNode.parentNode.classList.add('formulario__grupo-incorrecto');
             })
-            alert("Campos necesarios", "Porfavor llena todos los campos", "danger");
+            alert("Campos necesarios", "Porfavor llena todos los campos de forma correcto", "danger");
         }
     } else if (e.target === document.querySelector('.btn_login')) {
         //cuando se da click en el botón login

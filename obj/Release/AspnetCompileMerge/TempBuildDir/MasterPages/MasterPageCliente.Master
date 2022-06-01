@@ -126,7 +126,7 @@
                               <div class="formulario__grupo" id="grupo__nombre">
                                   <label for="nombre" class="formulario__label">Nombre</label>
                                   <div class="formulario__grupo-input">
-                                      <input type="text" class="registro formulario__input" name="nombre" id="nombre" placeholder="Citlali">
+                                      <input maxlength="20" type="text" class="registro formulario__input" name="nombre" id="nombre" placeholder="Citlali">
                                       <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
                                   </div>
                                   <p class="formulario__input-error">
@@ -137,7 +137,7 @@
                               <div class="formulario__grupo" id="grupo__apellidos">
                                   <label for="apellidos" class="formulario__label">Apellidos</label>
                                   <div class="formulario__grupo-input">
-                                      <input type="text" class="registro formulario__input" name="apellidos" id="apellidos" placeholder="Salinas">
+                                      <input maxlength="30" type="text" class="registro formulario__input" name="apellidos" id="apellidos" placeholder="Salinas">
                                       <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
                                   </div>
                                   <p class="formulario__input-error">
@@ -148,7 +148,7 @@
                               <div class="formulario__grupo" id="grupo__telefono">
                                   <label for="telefono" class="formulario__label">Celular</label>
                                   <div class="formulario__grupo-input">
-                                      <input type="text" class="registro formulario__input" name="telefono" id="telefono" placeholder="5544444444">
+                                      <input maxlength="10" type="text" class="registro formulario__input" name="telefono" id="telefono" placeholder="5544444444">
                                       <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
                                   </div>
                                   <p class="formulario__input-error">
@@ -159,7 +159,7 @@
                               <div class="formulario__grupo" id="grupo__correo">
                                   <label for="correo" class="formulario__label">Correo</label>
                                   <div class="formulario__grupo-input">
-                                      <input type="email" class="registro formulario__input" name="correo" id="correo" placeholder="correo@correo.com">
+                                      <input maxlength="30" type="email" class="registro formulario__input" name="correo" id="correo" placeholder="correo@correo.com">
                                       <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
                                   </div>
                                   <p class="formulario__input-error">
@@ -170,7 +170,7 @@
                               <div class="formulario__grupo" id="grupo__password">
                                   <label for="password" class="formulario__label">Contraseña</label>
                                   <div class="formulario__grupo-input">
-                                      <input type="password" class="registro formulario__input" name="password" id="password">
+                                      <input maxlength="20" type="password" class="registro formulario__input" name="password" id="password">
                                       <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
                                   </div>
                                   <p class="formulario__input-error">

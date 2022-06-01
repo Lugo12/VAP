@@ -9,6 +9,50 @@ import login from "./login.js";
         const $guardar = document.getElementById('guardarPerfil');
         const $inputs = document.querySelectorAll('.input_perfil');
         const $labels = document.querySelectorAll('.label');
+        //expresiones regulres
+        const expresiones = {
+            nombre: /^[a-zA-Z\u00C0-\u017F\s]{3,20}$/, // Letras y espacios, pueden llevar acentos.
+            apellidos: /^[a-zA-Z\u00C0-\u017F\s]{3,30}$/, // Letras y espacios, pueden llevar acentos.
+            correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+            telefono: /^\d{8,10}$/ // 8 a 10 numeros.
+        };
+        //objeto para saber si se llenaron todos los campos
+        const campos = {
+            nombre: true,
+            apellidos: true,
+            password: true,
+            correo: true,
+            telefono: true
+        };
+        //Función para validar los campos
+        const validarCampo = (expresion, input, campo) => {
+            if (expresion.test(input.value)) {
+                campos[campo] = true;
+                input.classList.remove('input_bad');
+            } else {
+                campos[campo] = false;
+                input.classList.add('input_bad');
+                alert('Campo con informaci&oacute;n err&oacute;nea', 'Asegurate de escribir la informaci&oacute;n que corresponde al campo', 'danger');
+            }
+        };
+        const validarFormulario = (e) => {
+            if (Array.from($inputs).includes(e.target)) {
+                switch (e.target.name) {
+                    case 'nombre':
+                        validarCampo(expresiones.nombre, e.target, 'nombre');
+                        break;
+                    case 'apellidos':
+                        validarCampo(expresiones.apellidos, e.target, 'apellidos');
+                        break;
+                    case 'correo':
+                        validarCampo(expresiones.correo, e.target, 'correo');
+                        break;
+                    case 'telefono':
+                        validarCampo(expresiones.telefono, e.target, 'telefono');
+                        break;
+                }
+            }
+        };
         //vista del perfil por default
         const por_default = () => {
             const cliente = JSON.parse(sessionStorage.getItem('cliente'));
@@ -26,6 +70,7 @@ import login from "./login.js";
                     case 'correo':
                         input.value = cliente.txt_correo_cliente;
                 }
+                input.classList.remove('input_bad');
             });
             $labels.forEach(label => {
                 switch (label.id) {
@@ -48,6 +93,8 @@ import login from "./login.js";
             $inputs.forEach((input) => input.classList.add('oculto'));
             $labels.forEach((label) => label.classList.remove('oculto'));
         };
+        //Delegación del eveto keyup para los inputs 
+        document.addEventListener('keyup', validarFormulario);
         //delegación del evento click en el boton editar, cancelar y guardar
         document.addEventListener('click', e => {
             if (e.target === $cancelar) por_default();
@@ -58,11 +105,12 @@ import login from "./login.js";
                 $inputs.forEach((input) => input.classList.remove('oculto'));
                 $labels.forEach((label) => label.classList.add('oculto'));
             } else if (e.target === $guardar) {
-                let flag = null;    //bandera par saber si los campos estan vacio
-                $inputs.forEach(input => {
-                    if (!input.value) flag = 1;
-                })
-                if (flag === null) {
+                if (
+                    campos.nombre &&
+                    campos.apellidos &&
+                    campos.correo &&
+                    campos.telefono
+                ) {
                     let estado = "editado";
                     if (document.getElementById('correo_usuario').textContent === document.getElementById('correo').value) estado = "sin_editar";     //si el correo no cambio
                     const data = {
@@ -97,7 +145,7 @@ import login from "./login.js";
                             alert("Error", "Algo salio mal.. Intentalo de nuevo m&aacute;s tarde", "danger");
                         }
                     )
-                } else alert('Campos necesarios', 'Asegurate de no dejar ningun campo vacio', 'danger');    //campos vacios
+                } else alert('Campos necesarios', 'Asegurate de no dejar ningun campo incorrecto', 'danger');    //campos vacios
             }
         });
         //información al cargar la página

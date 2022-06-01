@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\luis-\source\repos\VAP\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2022-05-18T17:14:42.3024965Z;</History>
+    <History>True|2022-06-01T17:49:55.0735798Z;True|2022-05-26T10:23:19.6639901-05:00;True|2022-05-18T12:14:42.3024965-05:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/EntityFramework.dll">
@@ -168,16 +168,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/08/2018 12:18:16</publishTime>
     </File>
     <File Include="bin/VAP.dll">
-      <publishTime>05/18/2022 12:14:24</publishTime>
+      <publishTime>06/01/2022 12:49:27</publishTime>
     </File>
     <File Include="bin/VAP.pdb">
-      <publishTime>05/18/2022 12:14:24</publishTime>
+      <publishTime>06/01/2022 12:49:27</publishTime>
     </File>
     <File Include="Carrito.aspx">
       <publishTime>05/01/2022 17:46:34</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>05/02/2022 23:57:56</publishTime>
+      <publishTime>05/26/2022 09:46:33</publishTime>
     </File>
     <File Include="EntityFramework.edmx.diagram">
       <publishTime>04/23/2022 16:35:00</publishTime>
@@ -249,22 +249,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/23/2022 17:35:07</publishTime>
     </File>
     <File Include="MasterPages/MasterPageCliente.Master">
-      <publishTime>05/02/2022 19:30:04</publishTime>
+      <publishTime>05/26/2022 10:17:14</publishTime>
     </File>
     <File Include="PedidosCliente.aspx">
       <publishTime>05/03/2022 20:43:54</publishTime>
     </File>
     <File Include="Perfil.aspx">
-      <publishTime>05/03/2022 08:22:08</publishTime>
+      <publishTime>05/26/2022 10:18:03</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>05/18/2022 12:14:31</publishTime>
+      <publishTime>06/01/2022 12:49:30</publishTime>
     </File>
     <File Include="Recursos/css/bootstrap.min.css">
       <publishTime>04/23/2022 19:25:59</publishTime>
     </File>
     <File Include="Recursos/css/estilos.css">
-      <publishTime>05/03/2022 19:52:08</publishTime>
+      <publishTime>05/26/2022 10:07:14</publishTime>
     </File>
     <File Include="Recursos/css/normalize.css">
       <publishTime>04/23/2022 18:40:22</publishTime>
@@ -291,13 +291,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/18/2022 11:29:57</publishTime>
     </File>
     <File Include="Recursos/js/main.js">
-      <publishTime>05/18/2022 11:58:01</publishTime>
+      <publishTime>06/01/2022 12:41:07</publishTime>
     </File>
     <File Include="Recursos/js/pedidosCliente.js">
       <publishTime>05/03/2022 20:27:01</publishTime>
     </File>
     <File Include="Recursos/js/perfil.js">
-      <publishTime>05/18/2022 11:40:20</publishTime>
+      <publishTime>05/26/2022 10:13:29</publishTime>
     </File>
     <File Include="Recursos/js/tooltip.js">
       <publishTime>04/29/2022 18:15:59</publishTime>
