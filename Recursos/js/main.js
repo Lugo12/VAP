@@ -1,6 +1,6 @@
 import { ajax } from './ajax.js';       //importando funcion ajax
 import { alert } from './alerta.js';       //importando funcion alert
-import login from './login.js';     //validación de usuario logueado
+import login from './login.js';     //validaciï¿½n de usuario logueado
 const $aside = document.querySelector('.aside');
 const $toggle = document.querySelector('.toggler');
 const $btn_lupa2 = document.querySelector('.lupa2');
@@ -8,7 +8,7 @@ const $busqueda = document.getElementById('input_busqueda');
 const $btn_lupa = document.querySelector('.lupa');
 const $scrollBtn = document.querySelector('.scroll-top-btn');
 const $modal = new bootstrap.Modal(document.getElementById('modal_main'));
-//función para eviar información de la busqueda al servidor
+//funciï¿½n para eviar informaciï¿½n de la busqueda al servidor
 const busqueda = () => {
     if ($busqueda.value) {
         const data = {
@@ -29,7 +29,7 @@ const busqueda = () => {
         )
     } else alert("&#191;Qu&eacute; buscas?", "Asegurate de escribir primero antes de buscar", "warning");
 }
-//delegación del evento keydown en el document para la busqueda
+//delegaciï¿½n del evento keydown en el document para la busqueda
 document.addEventListener('keydown', e => {
     if (e.target === $busqueda) {
         if (e.keyCode === 13) busqueda();
@@ -38,7 +38,7 @@ document.addEventListener('keydown', e => {
 //Evento para cuado se haga scroll en la ventana
 window.addEventListener('scroll', e => {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTo;
-    //mostramos el botón para hacer scroll
+    //mostramos el botï¿½n para hacer scroll
     if (scrollTop > 600) $scrollBtn.classList.remove('invisible');
     else $scrollBtn.classList.add('invisible');
 });
@@ -59,10 +59,11 @@ const campos = {
     nombre: false,
     apellidos: false,
     password: false,
+    password2: false,
     correo: false,
     telefono: false
 };
-//Función para validar los campos
+//Funciï¿½n para validar los campos
 const validarCampo = (expresion, input, campo) => {
     if (expresion.test(input.value)) {
         document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
@@ -84,7 +85,7 @@ const validarCampo = (expresion, input, campo) => {
         campos[campo] = false;
     }
 };
-//Función para validar las contraseñas
+//Funciï¿½n para validar las contraseï¿½as
 const validarPassword2 = () => {
     const inputPass1 = document.getElementById('password');
     const inputPass2 = document.getElementById('password2');
@@ -96,7 +97,7 @@ const validarPassword2 = () => {
         document
             .querySelector(`#grupo__password2 .formulario__input-error`)
             .classList.add('formulario__input-error-activo');
-        campos['password'] = false;
+        campos['password2'] = false;
     } else {
         document.getElementById(`grupo__password2`).classList.remove('formulario__grupo-incorrecto');
         document.getElementById(`grupo__password2`).classList.add('formulario__grupo-correcto');
@@ -105,10 +106,10 @@ const validarPassword2 = () => {
         document
             .querySelector(`#grupo__password2 .formulario__input-error`)
             .classList.remove('formulario__input-error-activo');
-        campos['password'] = true;
+        campos['password2'] = true;
     }
 };
-//Función para validar formulario
+//Funciï¿½n para validar formulario
 const validarFormulario = (e) => {
     if (inputs.includes(e.target)) {
         switch (e.target.name) {
@@ -134,9 +135,9 @@ const validarFormulario = (e) => {
         }
     }
 };
-//Delegación del eveto keyup para los inputs 
+//Delegaciï¿½n del eveto keyup para los inputs 
 document.addEventListener('keyup', validarFormulario);
-//Asignación del eveto blur para los inputs
+//Asignaciï¿½n del eveto blur para los inputs
 inputs.forEach((input) => {
     input.addEventListener('blur', validarFormulario);
 });
@@ -154,7 +155,7 @@ const limpiarModal = () => {
     document.querySelector('.formulario__validacion-estado-ojo').classList.add('fa-eye');
     document.querySelector('.formulario__validacion-estado-ojo').classList.remove('fa-eye-slash');
 }
-//delegación del evento click 
+//delegaciï¿½n del evento click 
 document.addEventListener('click', e => {
     if (e.target === $scrollBtn) {
         //boton de scroll
@@ -175,17 +176,17 @@ document.addEventListener('click', e => {
     else if (e.target === document.getElementById('a_login')) {
         login(() => alert('FBI', 'We are coming for you...', 'danger'), () => $modal.show())    //modal principal - login
     } else if (e.target === document.querySelector('.fa-eye')) {
-        //ojito activado para ver contraseña
+        //ojito activado para ver contraseï¿½a
         document.getElementById('passwordL').setAttribute('type', 'text');
         document.querySelector('.formulario__validacion-estado-ojo').classList.remove('fa-eye');
         document.querySelector('.formulario__validacion-estado-ojo').classList.add('fa-eye-slash');
     } else if (e.target === document.querySelector('.fa-eye-slash')) {
-        //ojito activado para no ver la contraseña
+        //ojito activado para no ver la contraseï¿½a
         document.getElementById('passwordL').setAttribute('type', 'password');
         document.querySelector('.formulario__validacion-estado-ojo').classList.add('fa-eye');
         document.querySelector('.formulario__validacion-estado-ojo').classList.remove('fa-eye-slash');
     } else if (e.target === document.querySelector('.btn_registro')) {
-        //cuando se da click en el botón registro
+        //cuando se da click en el botï¿½n registro
         if (
             campos.nombre &&
             campos.apellidos &&
@@ -251,7 +252,7 @@ document.addEventListener('click', e => {
             alert("Campos necesarios", "Porfavor llena todos los campos de forma correcto", "danger");
         }
     } else if (e.target === document.querySelector('.btn_login')) {
-        //cuando se da click en el botón login
+        //cuando se da click en el botï¿½n login
         const $correoL = document.getElementById('correoL');
         const $passwordL = document.getElementById('passwordL');
         if ($correoL.value && $passwordL.value) {
@@ -289,7 +290,7 @@ document.addEventListener('click', e => {
             )
         } else alert("Campos necesarios", "Porfavor llena todos los campos", "danger");
     } else if (e.target === document.querySelector('.sign-off')) {
-        //Click en el botón para cerrar sesión
+        //Click en el botï¿½n para cerrar sesiï¿½n
         sessionStorage.clear();
         location.replace("../Default.aspx");
     } else if (!Array.from(document.querySelectorAll('.aside_links')).includes(e.target)
@@ -298,5 +299,5 @@ document.addEventListener('click', e => {
 });
 //evento de cierre del modal
 document.getElementById('modal_main').addEventListener('hidden.bs.modal', limpiarModal);
-//función para comprobar si existe un cliente logueado
+//funciï¿½n para comprobar si existe un cliente logueado
 (() => login())();
