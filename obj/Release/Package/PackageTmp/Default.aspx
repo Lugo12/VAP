@@ -93,5 +93,5 @@
             <button type="button" class="boton detalles_producto btn" data-bs-toggle="modal" data-bs-target="#modal_detalles">Detalles</button>
         </div>
     </template>
-    <script type="module" src="Recursos/js/catalogo.js"></script>
+    <script type="module" src="Recursos/js/catalogo.js?n=1"></script>
 </asp:Content>

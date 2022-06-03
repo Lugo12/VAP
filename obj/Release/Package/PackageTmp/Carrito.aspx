@@ -28,5 +28,5 @@
             </div>
         </div>
     </template>
-    <script src="Recursos/js/carrito.js" type="module"></script>
+    <script src="Recursos/js/carrito.js?n=1" type="module"></script>
 </asp:Content>

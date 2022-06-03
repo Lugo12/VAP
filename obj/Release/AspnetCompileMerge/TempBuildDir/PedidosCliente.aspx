@@ -77,5 +77,5 @@
             </div>
         </article>
     </template>    
-    <script src="Recursos/js/pedidosCliente.js" type="module"></script>
+    <script src="Recursos/js/pedidosCliente.js?n=1" type="module"></script>
 </asp:Content>

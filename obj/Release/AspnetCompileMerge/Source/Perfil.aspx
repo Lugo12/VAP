@@ -29,5 +29,5 @@
             <input type="button" class="btn boton btn-success btn_perfil oculto" id="guardarPerfil" value="Guardar" />
         </article>
     </section>
-    <script src="Recursos/js/perfil.js" type="module"></script>
+    <script src="Recursos/js/perfil.js?n=1" type="module"></script>
 </asp:Content>
