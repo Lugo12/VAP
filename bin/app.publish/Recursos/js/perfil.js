@@ -13,7 +13,7 @@ import login from "./login.js";
         const expresiones = {
             nombre: /^[a-zA-Z\u00C0-\u017F\s]{3,20}$/, // Letras y espacios, pueden llevar acentos.
             apellidos: /^[a-zA-Z\u00C0-\u017F\s]{3,30}$/, // Letras y espacios, pueden llevar acentos.
-            correo: /^[a-zA-Z0-9_.+-\u00f1\u00d1]+@[a-zA-Z0-9-\u00f1\u00d1]+\.[a-zA-Z0-9-.\u00f1\u00d1]+$/,
+            correo: /^[a-zA-Z0-9\_\.\-+\u00f1\u00d1]+\@[a-zA-Z0-9\_\.\-+\u00f1\u00d1]+\.[a-zA-Z0-9\_\.\-+\u00f1\u00d1]+$/,
             telefono: /^\d{8,10}$/ // 8 a 10 numeros.
         };
         //objeto para saber si se llenaron todos los campos
@@ -55,6 +55,13 @@ import login from "./login.js";
         };
         //vista del perfil por default
         const por_default = () => {
+            //Reiniciamos el valor de los campos
+            campos.nombre = true;
+            campos.apellidos = true;
+            campos.password = true;
+            campos.correo = true;
+            campos.telefono = true;
+            //Traemos el cliente
             const cliente = JSON.parse(sessionStorage.getItem('cliente'));
             $inputs.forEach(input => {
                 switch (input.id) {

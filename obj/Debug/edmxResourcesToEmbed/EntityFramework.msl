@@ -1,37 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="VAP_ProjectModelStoreContainer" CdmEntityContainer="VAP_ProjectEntities">
-    <FunctionImportMapping FunctionImportName="AgrgarProductoVenta" FunctionName="VAP_ProjectModel.Store.AgrgarProductoVenta" />
-    <FunctionImportMapping FunctionImportName="CancelarPedido" FunctionName="VAP_ProjectModel.Store.CancelarPedido" />
-    <FunctionImportMapping FunctionImportName="ComprobarPass" FunctionName="VAP_ProjectModel.Store.ComprobarPass">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="VAP_ProjectModel.ComprobarPass_Result">
-          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
-          <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
-          <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
-          <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
-          <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
-          <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
-          <ScalarProperty Name="Pass" ColumnName="Pass" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="CrearCliente" FunctionName="VAP_ProjectModel.Store.CrearCliente">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="VAP_ProjectModel.CrearCliente_Result">
-          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
-          <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
-          <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
-          <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
-          <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
-          <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="CrearProducto" FunctionName="VAP_ProjectModel.Store.CrearProducto" />
-    <FunctionImportMapping FunctionImportName="CrearVariante" FunctionName="VAP_ProjectModel.Store.CrearVariante" />
-    <FunctionImportMapping FunctionImportName="CreaVentaNueva" FunctionName="VAP_ProjectModel.Store.CreaVentaNueva" />
-    <FunctionImportMapping FunctionImportName="EditarInfCliente" FunctionName="VAP_ProjectModel.Store.EditarInfCliente" />
     <EntitySetMapping Name="administrador">
       <EntityTypeMapping TypeName="VAP_ProjectModel.administrador">
         <MappingFragment StoreEntitySet="administrador">
@@ -107,9 +76,40 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CrearCliente" FunctionName="VAP_ProjectModel.Store.CrearCliente">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VAP_ProjectModel.CrearCliente_Result1">
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+          <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
+          <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
+          <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
+          <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
+          <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="EditarInfCliente" FunctionName="VAP_ProjectModel.Store.EditarInfCliente" />
+    <FunctionImportMapping FunctionImportName="ComprobarPass" FunctionName="VAP_ProjectModel.Store.ComprobarPass">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VAP_ProjectModel.ComprobarPass_Result1">
+          <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+          <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
+          <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
+          <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
+          <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
+          <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
+          <ScalarProperty Name="Pass" ColumnName="Pass" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="AgrgarProductoVenta" FunctionName="VAP_ProjectModel.Store.AgrgarProductoVenta" />
+    <FunctionImportMapping FunctionImportName="CancelarPedido" FunctionName="VAP_ProjectModel.Store.CancelarPedido" />
+    <FunctionImportMapping FunctionImportName="CrearProducto" FunctionName="VAP_ProjectModel.Store.CrearProducto" />
+    <FunctionImportMapping FunctionImportName="CrearVariante" FunctionName="VAP_ProjectModel.Store.CrearVariante" />
+    <FunctionImportMapping FunctionImportName="CreaVentaNueva" FunctionName="VAP_ProjectModel.Store.CreaVentaNueva" />
     <FunctionImportMapping FunctionImportName="GetPedidos" FunctionName="VAP_ProjectModel.Store.GetPedidos">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="VAP_ProjectModel.GetPedidos_Result">
+        <ComplexTypeMapping TypeName="VAP_ProjectModel.GetPedidos_Result1">
           <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
           <ScalarProperty Name="d_fecha_pedido" ColumnName="d_fecha_pedido" />
           <ScalarProperty Name="dec_total_pedido" ColumnName="dec_total_pedido" />

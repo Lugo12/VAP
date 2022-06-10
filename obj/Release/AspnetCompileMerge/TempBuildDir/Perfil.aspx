@@ -16,7 +16,7 @@
         <article class="datos celular">
             <span class="perfil_texto">Celular:</span>
             <span id="celular_usuario" class="perfil_texto label"></span>
-            <input maxlength="10" name="telefono" type="text" class="celular_usuario input_perfil form-control form-control-sm oculto" id="celular"/>
+            <input maxlength="10" name="telefono" type="tel" class="celular_usuario input_perfil form-control form-control-sm oculto" id="celular"/>
         </article>
         <article class="datos correo">
             <span class="perfil_texto">Correo:</span>

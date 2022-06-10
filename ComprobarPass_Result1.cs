@@ -10,24 +10,15 @@
 namespace VAP
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class cliente
+    public partial class ComprobarPass_Result1
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public cliente()
-        {
-            this.pedido = new HashSet<pedido>();
-        }
-    
         public int id_cliente { get; set; }
         public string txt_nombre_cliente { get; set; }
         public string txt_apellidos_cliente { get; set; }
         public string int_celular_cliente { get; set; }
         public string txt_correo_cliente { get; set; }
         public byte[] txt_contraseña_cliente { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pedido> pedido { get; set; }
+        public string Pass { get; set; }
     }
 }

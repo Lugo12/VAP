@@ -15,7 +15,7 @@
     <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="txt_nombre_cliente" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="txt_apellidos_cliente" Type="varchar" MaxLength="40" Nullable="false" />
-    <Property Name="int_celular_cliente" Type="bigint" Nullable="false" />
+    <Property Name="int_celular_cliente" Type="varchar" MaxLength="10" />
     <Property Name="txt_correo_cliente" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="txt_contraseña_cliente" Type="varbinary(max)" Nullable="false" />
   </EntityType>
@@ -43,7 +43,7 @@
     <Property Name="txt_estado_prenda" Type="varchar" MaxLength="13" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'VAP_Project.dbo.producto_seleccionado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'VAP-Project.dbo.producto_seleccionado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="producto_seleccionado">
     <Key>
       <PropertyRef Name="int_cantidad_subpedido" />
@@ -137,7 +137,7 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
   <Function Name="CrearCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="nombre_cliente" Type="varchar" Mode="In" />
     <Parameter Name="apellidos_cliente" Type="varchar" Mode="In" />
-    <Parameter Name="celular_cliente" Type="bigint" Mode="In" />
+    <Parameter Name="celular_cliente" Type="varchar" Mode="In" />
     <Parameter Name="correo_cliente" Type="varchar" Mode="In" />
     <Parameter Name="contraseña_cliente" Type="varchar(max)" Mode="In" />
   </Function>
@@ -166,7 +166,7 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
     <Parameter Name="idcliente" Type="int" Mode="In" />
     <Parameter Name="nomCliente" Type="varchar" Mode="In" />
     <Parameter Name="ApeCliente" Type="varchar" Mode="In" />
-    <Parameter Name="celClietne" Type="bigint" Mode="In" />
+    <Parameter Name="celClietne" Type="varchar" Mode="In" />
     <Parameter Name="correoCliente" Type="varchar" Mode="In" />
   </Function>
   <Function Name="GetPedidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

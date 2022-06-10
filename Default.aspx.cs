@@ -59,7 +59,7 @@ namespace VAP
                     var estado = "";
                     if (db.ComprobarPass(correo).ToList().Count > 0) estado = JsonConvert.SerializeObject("correo_existente", Formatting.Indented);
                     else {
-                        db.CrearCliente(nombre, apellidos, long.Parse(telefono), correo, password);
+                        db.CrearCliente(nombre, apellidos, telefono, correo, password);
                         db.SaveChanges();
                         //cliente = JsonConvert.SerializeObject(db.ComprobarPass(correo).ToList(), Formatting.Indented);
                         estado = JsonConvert.SerializeObject(db.ComprobarPass(correo).ToList(), Formatting.Indented);

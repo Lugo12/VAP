@@ -35,6 +35,65 @@ namespace VAP
         public virtual DbSet<venta> venta { get; set; }
         public virtual DbSet<producto_seleccionado> producto_seleccionado { get; set; }
     
+        public virtual ObjectResult<CrearCliente_Result1> CrearCliente(string nombre_cliente, string apellidos_cliente, string celular_cliente, string correo_cliente, string contraseña_cliente)
+        {
+            var nombre_clienteParameter = nombre_cliente != null ?
+                new ObjectParameter("nombre_cliente", nombre_cliente) :
+                new ObjectParameter("nombre_cliente", typeof(string));
+    
+            var apellidos_clienteParameter = apellidos_cliente != null ?
+                new ObjectParameter("apellidos_cliente", apellidos_cliente) :
+                new ObjectParameter("apellidos_cliente", typeof(string));
+    
+            var celular_clienteParameter = celular_cliente != null ?
+                new ObjectParameter("celular_cliente", celular_cliente) :
+                new ObjectParameter("celular_cliente", typeof(string));
+    
+            var correo_clienteParameter = correo_cliente != null ?
+                new ObjectParameter("correo_cliente", correo_cliente) :
+                new ObjectParameter("correo_cliente", typeof(string));
+    
+            var contraseña_clienteParameter = contraseña_cliente != null ?
+                new ObjectParameter("contraseña_cliente", contraseña_cliente) :
+                new ObjectParameter("contraseña_cliente", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CrearCliente_Result1>("CrearCliente", nombre_clienteParameter, apellidos_clienteParameter, celular_clienteParameter, correo_clienteParameter, contraseña_clienteParameter);
+        }
+    
+        public virtual int EditarInfCliente(Nullable<int> idcliente, string nomCliente, string apeCliente, string celClietne, string correoCliente)
+        {
+            var idclienteParameter = idcliente.HasValue ?
+                new ObjectParameter("idcliente", idcliente) :
+                new ObjectParameter("idcliente", typeof(int));
+    
+            var nomClienteParameter = nomCliente != null ?
+                new ObjectParameter("nomCliente", nomCliente) :
+                new ObjectParameter("nomCliente", typeof(string));
+    
+            var apeClienteParameter = apeCliente != null ?
+                new ObjectParameter("ApeCliente", apeCliente) :
+                new ObjectParameter("ApeCliente", typeof(string));
+    
+            var celClietneParameter = celClietne != null ?
+                new ObjectParameter("celClietne", celClietne) :
+                new ObjectParameter("celClietne", typeof(string));
+    
+            var correoClienteParameter = correoCliente != null ?
+                new ObjectParameter("correoCliente", correoCliente) :
+                new ObjectParameter("correoCliente", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EditarInfCliente", idclienteParameter, nomClienteParameter, apeClienteParameter, celClietneParameter, correoClienteParameter);
+        }
+    
+        public virtual ObjectResult<ComprobarPass_Result1> ComprobarPass(string correo)
+        {
+            var correoParameter = correo != null ?
+                new ObjectParameter("correo", correo) :
+                new ObjectParameter("correo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComprobarPass_Result1>("ComprobarPass", correoParameter);
+        }
+    
         public virtual int AgrgarProductoVenta(Nullable<int> cantidad, string idVariante)
         {
             var cantidadParameter = cantidad.HasValue ?
@@ -59,40 +118,6 @@ namespace VAP
                 new ObjectParameter("idCliente", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CancelarPedido", idPedidoParameter, idClienteParameter);
-        }
-    
-        public virtual ObjectResult<ComprobarPass_Result> ComprobarPass(string correo)
-        {
-            var correoParameter = correo != null ?
-                new ObjectParameter("correo", correo) :
-                new ObjectParameter("correo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComprobarPass_Result>("ComprobarPass", correoParameter);
-        }
-    
-        public virtual ObjectResult<CrearCliente_Result> CrearCliente(string nombre_cliente, string apellidos_cliente, Nullable<long> celular_cliente, string correo_cliente, string contraseña_cliente)
-        {
-            var nombre_clienteParameter = nombre_cliente != null ?
-                new ObjectParameter("nombre_cliente", nombre_cliente) :
-                new ObjectParameter("nombre_cliente", typeof(string));
-    
-            var apellidos_clienteParameter = apellidos_cliente != null ?
-                new ObjectParameter("apellidos_cliente", apellidos_cliente) :
-                new ObjectParameter("apellidos_cliente", typeof(string));
-    
-            var celular_clienteParameter = celular_cliente.HasValue ?
-                new ObjectParameter("celular_cliente", celular_cliente) :
-                new ObjectParameter("celular_cliente", typeof(long));
-    
-            var correo_clienteParameter = correo_cliente != null ?
-                new ObjectParameter("correo_cliente", correo_cliente) :
-                new ObjectParameter("correo_cliente", typeof(string));
-    
-            var contraseña_clienteParameter = contraseña_cliente != null ?
-                new ObjectParameter("contraseña_cliente", contraseña_cliente) :
-                new ObjectParameter("contraseña_cliente", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CrearCliente_Result>("CrearCliente", nombre_clienteParameter, apellidos_clienteParameter, celular_clienteParameter, correo_clienteParameter, contraseña_clienteParameter);
         }
     
         public virtual int CrearProducto(string txt_tipo_prenda, string txt_concepto_prenda, string txt_marca_prenda, Nullable<decimal> dec_precio_prenda, string img_blanco_prenda, string img_negro_prenda, string txt_estado_prenda)
@@ -170,38 +195,13 @@ namespace VAP
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CreaVentaNueva", fecha_pedidoParameter, total_pedidoParameter, id_clienteParameter);
         }
     
-        public virtual int EditarInfCliente(Nullable<int> idcliente, string nomCliente, string apeCliente, Nullable<long> celClietne, string correoCliente)
-        {
-            var idclienteParameter = idcliente.HasValue ?
-                new ObjectParameter("idcliente", idcliente) :
-                new ObjectParameter("idcliente", typeof(int));
-    
-            var nomClienteParameter = nomCliente != null ?
-                new ObjectParameter("nomCliente", nomCliente) :
-                new ObjectParameter("nomCliente", typeof(string));
-    
-            var apeClienteParameter = apeCliente != null ?
-                new ObjectParameter("ApeCliente", apeCliente) :
-                new ObjectParameter("ApeCliente", typeof(string));
-    
-            var celClietneParameter = celClietne.HasValue ?
-                new ObjectParameter("celClietne", celClietne) :
-                new ObjectParameter("celClietne", typeof(long));
-    
-            var correoClienteParameter = correoCliente != null ?
-                new ObjectParameter("correoCliente", correoCliente) :
-                new ObjectParameter("correoCliente", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EditarInfCliente", idclienteParameter, nomClienteParameter, apeClienteParameter, celClietneParameter, correoClienteParameter);
-        }
-    
-        public virtual ObjectResult<GetPedidos_Result> GetPedidos(Nullable<int> id_cliente)
+        public virtual ObjectResult<GetPedidos_Result1> GetPedidos(Nullable<int> id_cliente)
         {
             var id_clienteParameter = id_cliente.HasValue ?
                 new ObjectParameter("id_cliente", id_cliente) :
                 new ObjectParameter("id_cliente", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPedidos_Result>("GetPedidos", id_clienteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPedidos_Result1>("GetPedidos", id_clienteParameter);
         }
     }
 }

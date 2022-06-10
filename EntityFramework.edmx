@@ -20,7 +20,7 @@
           <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="txt_nombre_cliente" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="txt_apellidos_cliente" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="int_celular_cliente" Type="bigint" Nullable="false" />
+          <Property Name="int_celular_cliente" Type="varchar" MaxLength="10" />
           <Property Name="txt_correo_cliente" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="txt_contraseña_cliente" Type="varbinary(max)" Nullable="false" />
         </EntityType>
@@ -48,7 +48,7 @@
           <Property Name="txt_estado_prenda" Type="varchar" MaxLength="13" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'VAP_Project.dbo.producto_seleccionado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'VAP-Project.dbo.producto_seleccionado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="producto_seleccionado">
           <Key>
             <PropertyRef Name="int_cantidad_subpedido" />
@@ -142,7 +142,7 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
         <Function Name="CrearCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre_cliente" Type="varchar" Mode="In" />
           <Parameter Name="apellidos_cliente" Type="varchar" Mode="In" />
-          <Parameter Name="celular_cliente" Type="bigint" Mode="In" />
+          <Parameter Name="celular_cliente" Type="varchar" Mode="In" />
           <Parameter Name="correo_cliente" Type="varchar" Mode="In" />
           <Parameter Name="contraseña_cliente" Type="varchar(max)" Mode="In" />
         </Function>
@@ -171,7 +171,7 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
           <Parameter Name="idcliente" Type="int" Mode="In" />
           <Parameter Name="nomCliente" Type="varchar" Mode="In" />
           <Parameter Name="ApeCliente" Type="varchar" Mode="In" />
-          <Parameter Name="celClietne" Type="bigint" Mode="In" />
+          <Parameter Name="celClietne" Type="varchar" Mode="In" />
           <Parameter Name="correoCliente" Type="varchar" Mode="In" />
         </Function>
         <Function Name="GetPedidos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -213,52 +213,6 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
     <edmx:ConceptualModels>
       <Schema Namespace="VAP_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="VAP_ProjectEntities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="AgrgarProductoVenta">
-            <Parameter Name="cantidad" Mode="In" Type="Int32" />
-            <Parameter Name="idVariante" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="CancelarPedido">
-            <Parameter Name="idPedido" Mode="In" Type="Int32" />
-            <Parameter Name="idCliente" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="ComprobarPass" ReturnType="Collection(VAP_ProjectModel.ComprobarPass_Result)">
-          <Parameter Name="correo" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="CrearCliente" ReturnType="Collection(VAP_ProjectModel.CrearCliente_Result)">
-            <Parameter Name="nombre_cliente" Mode="In" Type="String" />
-            <Parameter Name="apellidos_cliente" Mode="In" Type="String" />
-            <Parameter Name="celular_cliente" Mode="In" Type="Int64" />
-            <Parameter Name="correo_cliente" Mode="In" Type="String" />
-            <Parameter Name="contraseña_cliente" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="CrearProducto">
-            <Parameter Name="txt_tipo_prenda" Mode="In" Type="String" />
-            <Parameter Name="txt_concepto_prenda" Mode="In" Type="String" />
-            <Parameter Name="txt_marca_prenda" Mode="In" Type="String" />
-            <Parameter Name="dec_precio_prenda" Mode="In" Type="Decimal" />
-            <Parameter Name="img_blanco_prenda" Mode="In" Type="String" />
-            <Parameter Name="img_negro_prenda" Mode="In" Type="String" />
-            <Parameter Name="txt_estado_prenda" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="CrearVariante">
-            <Parameter Name="txt_color_prenda" Mode="In" Type="String" />
-            <Parameter Name="txt_talla_prenda" Mode="In" Type="String" />
-            <Parameter Name="int_cantidad_prenda" Mode="In" Type="Int32" />
-            <Parameter Name="idVariante" Mode="In" Type="String" />
-            <Parameter Name="idprenda" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CreaVentaNueva">
-            <Parameter Name="fecha_pedido" Mode="In" Type="DateTime" />
-            <Parameter Name="total_pedido" Mode="In" Type="Decimal" />
-            <Parameter Name="id_cliente" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="EditarInfCliente">
-            <Parameter Name="idcliente" Mode="In" Type="Int32" />
-            <Parameter Name="nomCliente" Mode="In" Type="String" />
-            <Parameter Name="ApeCliente" Mode="In" Type="String" />
-            <Parameter Name="celClietne" Mode="In" Type="Int64" />
-            <Parameter Name="correoCliente" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="administrador" EntityType="VAP_ProjectModel.administrador" />
           <EntitySet Name="cliente" EntityType="VAP_ProjectModel.cliente" />
           <EntitySet Name="pedido" EntityType="VAP_ProjectModel.pedido" />
@@ -282,7 +236,53 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
             <End Role="producto" EntitySet="producto" />
             <End Role="variantes_producto" EntitySet="variantes_producto" />
           </AssociationSet>
-          <FunctionImport Name="GetPedidos" ReturnType="Collection(VAP_ProjectModel.GetPedidos_Result)">
+          <FunctionImport Name="CrearCliente" ReturnType="Collection(VAP_ProjectModel.CrearCliente_Result1)">
+            <Parameter Name="nombre_cliente" Mode="In" Type="String" />
+            <Parameter Name="apellidos_cliente" Mode="In" Type="String" />
+            <Parameter Name="celular_cliente" Mode="In" Type="String" />
+            <Parameter Name="correo_cliente" Mode="In" Type="String" />
+            <Parameter Name="contraseña_cliente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EditarInfCliente">
+            <Parameter Name="idcliente" Mode="In" Type="Int32" />
+            <Parameter Name="nomCliente" Mode="In" Type="String" />
+            <Parameter Name="ApeCliente" Mode="In" Type="String" />
+            <Parameter Name="celClietne" Mode="In" Type="String" />
+            <Parameter Name="correoCliente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ComprobarPass" ReturnType="Collection(VAP_ProjectModel.ComprobarPass_Result1)">
+          <Parameter Name="correo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AgrgarProductoVenta">
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="idVariante" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CancelarPedido">
+            <Parameter Name="idPedido" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CrearProducto">
+            <Parameter Name="txt_tipo_prenda" Mode="In" Type="String" />
+            <Parameter Name="txt_concepto_prenda" Mode="In" Type="String" />
+            <Parameter Name="txt_marca_prenda" Mode="In" Type="String" />
+            <Parameter Name="dec_precio_prenda" Mode="In" Type="Decimal" />
+            <Parameter Name="img_blanco_prenda" Mode="In" Type="String" />
+            <Parameter Name="img_negro_prenda" Mode="In" Type="String" />
+            <Parameter Name="txt_estado_prenda" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CrearVariante">
+            <Parameter Name="txt_color_prenda" Mode="In" Type="String" />
+            <Parameter Name="txt_talla_prenda" Mode="In" Type="String" />
+            <Parameter Name="int_cantidad_prenda" Mode="In" Type="Int32" />
+            <Parameter Name="idVariante" Mode="In" Type="String" />
+            <Parameter Name="idprenda" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CreaVentaNueva">
+            <Parameter Name="fecha_pedido" Mode="In" Type="DateTime" />
+            <Parameter Name="total_pedido" Mode="In" Type="Decimal" />
+            <Parameter Name="id_cliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPedidos" ReturnType="Collection(VAP_ProjectModel.GetPedidos_Result1)">
             <Parameter Name="id_cliente" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -303,6 +303,21 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
           <Property Type="String" Name="txt_correo_cliente" Nullable="false" MaxLength="45" />
           <Property Type="Binary" Name="txt_contraseña_cliente" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="GetPedidos_Result">
+          <Property Type="Int32" Name="id_pedido" Nullable="false" />
+          <Property Type="DateTime" Name="d_fecha_pedido" Nullable="false" />
+          <Property Type="Decimal" Name="dec_total_pedido" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="String" Name="txt_estado_pedido" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="txt_tipo_prenda" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="txt_marca_prenda" Nullable="false" MaxLength="20" />
+          <Property Type="Decimal" Name="dec_precio_prenda" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="String" Name="img_blanco_prenda" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="img_negro_prenda" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="txt_color_prenda" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="txt_talla_prenda" Nullable="false" MaxLength="2" />
+          <Property Type="Int32" Name="int_cantidad_subpedido" Nullable="false" />
+          <Property Type="Int32" Name="id_cliente" Nullable="false" />
+        </ComplexType>
         <EntityType Name="administrador">
           <Key>
             <PropertyRef Name="id_administrador" />
@@ -318,7 +333,7 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
           <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="txt_nombre_cliente" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="txt_apellidos_cliente" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="int_celular_cliente" Type="Int64" Nullable="false" />
+          <Property Name="int_celular_cliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="txt_correo_cliente" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="txt_contraseña_cliente" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="pedido" Relationship="VAP_ProjectModel.fk_pedido_cliente" FromRole="cliente" ToRole="pedido" />
@@ -429,7 +444,24 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="GetPedidos_Result">
+        <ComplexType Name="CrearCliente_Result1">
+          <Property Type="Int32" Name="id_cliente" Nullable="false" />
+          <Property Type="String" Name="txt_nombre_cliente" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="txt_apellidos_cliente" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="int_celular_cliente" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="txt_correo_cliente" Nullable="false" MaxLength="45" />
+          <Property Type="Binary" Name="txt_contraseña_cliente" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ComprobarPass_Result1">
+          <Property Type="Int32" Name="id_cliente" Nullable="false" />
+          <Property Type="String" Name="txt_nombre_cliente" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="txt_apellidos_cliente" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="int_celular_cliente" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="txt_correo_cliente" Nullable="false" MaxLength="45" />
+          <Property Type="Binary" Name="txt_contraseña_cliente" Nullable="false" />
+          <Property Type="String" Name="Pass" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetPedidos_Result1">
           <Property Type="Int32" Name="id_pedido" Nullable="false" />
           <Property Type="DateTime" Name="d_fecha_pedido" Nullable="false" />
           <Property Type="Decimal" Name="dec_total_pedido" Nullable="false" Precision="8" Scale="2" />
@@ -450,37 +482,6 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="VAP_ProjectModelStoreContainer" CdmEntityContainer="VAP_ProjectEntities">
-          <FunctionImportMapping FunctionImportName="AgrgarProductoVenta" FunctionName="VAP_ProjectModel.Store.AgrgarProductoVenta" />
-          <FunctionImportMapping FunctionImportName="CancelarPedido" FunctionName="VAP_ProjectModel.Store.CancelarPedido" />
-          <FunctionImportMapping FunctionImportName="ComprobarPass" FunctionName="VAP_ProjectModel.Store.ComprobarPass">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="VAP_ProjectModel.ComprobarPass_Result">
-                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
-                <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
-                <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
-                <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
-                <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
-                <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
-                <ScalarProperty Name="Pass" ColumnName="Pass" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CrearCliente" FunctionName="VAP_ProjectModel.Store.CrearCliente">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="VAP_ProjectModel.CrearCliente_Result">
-                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
-                <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
-                <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
-                <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
-                <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
-                <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CrearProducto" FunctionName="VAP_ProjectModel.Store.CrearProducto" />
-          <FunctionImportMapping FunctionImportName="CrearVariante" FunctionName="VAP_ProjectModel.Store.CrearVariante" />
-          <FunctionImportMapping FunctionImportName="CreaVentaNueva" FunctionName="VAP_ProjectModel.Store.CreaVentaNueva" />
-          <FunctionImportMapping FunctionImportName="EditarInfCliente" FunctionName="VAP_ProjectModel.Store.EditarInfCliente" />
           <EntitySetMapping Name="administrador">
             <EntityTypeMapping TypeName="VAP_ProjectModel.administrador">
               <MappingFragment StoreEntitySet="administrador">
@@ -556,9 +557,40 @@ advertencia 6035: La relación 'fk_producto_pedido' tiene columnas que no forman
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CrearCliente" FunctionName="VAP_ProjectModel.Store.CrearCliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VAP_ProjectModel.CrearCliente_Result1">
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
+                <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
+                <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
+                <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
+                <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EditarInfCliente" FunctionName="VAP_ProjectModel.Store.EditarInfCliente" />
+          <FunctionImportMapping FunctionImportName="ComprobarPass" FunctionName="VAP_ProjectModel.Store.ComprobarPass">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VAP_ProjectModel.ComprobarPass_Result1">
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="txt_nombre_cliente" ColumnName="txt_nombre_cliente" />
+                <ScalarProperty Name="txt_apellidos_cliente" ColumnName="txt_apellidos_cliente" />
+                <ScalarProperty Name="int_celular_cliente" ColumnName="int_celular_cliente" />
+                <ScalarProperty Name="txt_correo_cliente" ColumnName="txt_correo_cliente" />
+                <ScalarProperty Name="txt_contraseña_cliente" ColumnName="txt_contraseña_cliente" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AgrgarProductoVenta" FunctionName="VAP_ProjectModel.Store.AgrgarProductoVenta" />
+          <FunctionImportMapping FunctionImportName="CancelarPedido" FunctionName="VAP_ProjectModel.Store.CancelarPedido" />
+          <FunctionImportMapping FunctionImportName="CrearProducto" FunctionName="VAP_ProjectModel.Store.CrearProducto" />
+          <FunctionImportMapping FunctionImportName="CrearVariante" FunctionName="VAP_ProjectModel.Store.CrearVariante" />
+          <FunctionImportMapping FunctionImportName="CreaVentaNueva" FunctionName="VAP_ProjectModel.Store.CreaVentaNueva" />
           <FunctionImportMapping FunctionImportName="GetPedidos" FunctionName="VAP_ProjectModel.Store.GetPedidos">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="VAP_ProjectModel.GetPedidos_Result">
+              <ComplexTypeMapping TypeName="VAP_ProjectModel.GetPedidos_Result1">
                 <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
                 <ScalarProperty Name="d_fecha_pedido" ColumnName="d_fecha_pedido" />
                 <ScalarProperty Name="dec_total_pedido" ColumnName="dec_total_pedido" />

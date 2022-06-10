@@ -50,8 +50,8 @@ const inputs = Array.from(document.querySelectorAll('.formulario__input'));
 const expresiones = {
     nombre: /^[a-zA-Z\u00C0-\u017F\s]{3,20}$/, // Letras y espacios, pueden llevar acentos.
     apellidos: /^[a-zA-Z\u00C0-\u017F\s]{3,30}$/, // Letras y espacios, pueden llevar acentos.
-    password: /^.{4,12}$/, // 4 a 12 digitos-.
-    correo: /^[a-zA-Z0-9_.+-\u00f1\u00d1]+@[a-zA-Z0-9-\u00f1\u00d1]+\.[a-zA-Z0-9-.\u00f1\u00d1]+$/,
+    password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,20}$/, // 8 a 20 digitos-.
+    correo: /^[a-zA-Z0-9\_\.\-+\u00f1\u00d1]+\@[a-zA-Z0-9\_\.\-+\u00f1\u00d1]+\.[a-zA-Z0-9\_\.\-+\u00f1\u00d1]+$/,
     telefono: /^\d{8,10}$/ // 8 a 10 numeros.
 };
 //objeto para saber si se llenaron todos los campos

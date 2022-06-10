@@ -10,8 +10,8 @@
         <EntityTypeShape EntityType="VAP_ProjectModel.pedido" Width="1.5" PointX="3" PointY="1.875" />
         <EntityTypeShape EntityType="VAP_ProjectModel.producto" Width="1.5" PointX="0.75" PointY="7" />
         <EntityTypeShape EntityType="VAP_ProjectModel.variantes_producto" Width="1.5" PointX="3" PointY="7.125" />
-        <EntityTypeShape EntityType="VAP_ProjectModel.venta" Width="1.5" PointX="5.25" PointY="1" />
-        <EntityTypeShape EntityType="VAP_ProjectModel.producto_seleccionado" Width="1.5" PointX="5.25" PointY="3.375" />
+        <EntityTypeShape EntityType="VAP_ProjectModel.venta" Width="1.5" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="VAP_ProjectModel.producto_seleccionado" Width="1.5" PointX="5.25" PointY="1" />
         <AssociationConnector Association="VAP_ProjectModel.fk_pedido_cliente" />
         <AssociationConnector Association="VAP_ProjectModel.fk_pedido_completo" />
         <AssociationConnector Association="VAP_ProjectModel.fk_venta_pedido" />

@@ -147,7 +147,13 @@
     <Compile Include="ComprobarPass_Result.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
+    <Compile Include="ComprobarPass_Result1.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
     <Compile Include="CrearCliente_Result.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CrearCliente_Result1.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
@@ -173,6 +179,9 @@
       <DependentUpon>EntityFramework.edmx</DependentUpon>
     </Compile>
     <Compile Include="GetPedidos_Result.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPedidos_Result1.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
     <Compile Include="MasterPages\MasterPageAdministrador.Master.cs">

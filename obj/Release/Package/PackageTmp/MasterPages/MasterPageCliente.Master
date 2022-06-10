@@ -105,14 +105,14 @@
                           <div class="formulario__grupo" id="grupo__correoL">
                               <label for="correoL" class="formulario__label">Correo</label>
                               <div class="formulario__grupo-input">
-                                  <input type="email" class="formulario__input" name="correoL" id="correoL">  
+                                  <input maxlength="30" type="text" class="formulario__input" name="correoL" id="correoL">  
                               </div>    
                           </div>
                           <!-- Grupo: Contraseña -->
                           <div class="formulario__grupo" id="grupo__passwordL">
                               <label for="passwordL" class="formulario__label">Contraseña</label>
                               <div class="formulario__grupo-input">
-                                  <input type="password" class="formulario__input" name="passwordL" id="passwordL">
+                                  <input maxlength="20" type="password" class="formulario__input" name="passwordL" id="passwordL">
                                   <i class="fa-solid fa-eye formulario__validacion-estado-ojo"></i>
                               </div>
                           </div>
@@ -148,11 +148,11 @@
                               <div class="formulario__grupo" id="grupo__telefono">
                                   <label for="telefono" class="formulario__label">Celular</label>
                                   <div class="formulario__grupo-input">
-                                      <input maxlength="10" type="text" class="registro formulario__input" name="telefono" id="telefono" placeholder="5544444444">
+                                      <input maxlength="10" type="tel" class="registro formulario__input" name="telefono" id="telefono" placeholder="5544444444">
                                       <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
                                   </div>
                                   <p class="formulario__input-error">
-                                      El teléfono solo puede contener números y el máximo son 14 dígitos.
+                                      El teléfono solo puede contener números, el mínimo son 8 y el máximo son 10 dígitos.
                                   </p>
                               </div>
                               <!-- Grupo: Correo -->
@@ -174,7 +174,7 @@
                                       <i class="fa-solid fa-circle-xmark formulario__validacion-estado"></i>
                                   </div>
                                   <p class="formulario__input-error">
-                                      La contraseña tiene que ser de 4 a 12 dígitos.
+                                      La contraseña debe tener al entre 8 y 20 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.
                                   </p>
                               </div>
                               <!-- Grupo: Contraseña 2 -->
